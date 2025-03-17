@@ -54,9 +54,6 @@ body {
 
 #return > svg {
     height: calc(100% - 20px); width: calc(100% - 20px);
-    /* position: absolute;
-    top: 0;
-    left: 0; */
 }
 
 @media (min-width: 1024px) {
@@ -163,10 +160,12 @@ body {
 
 .slider-back {
     position: absolute;
+    z-index: -1;
     top: 0;
     left: 0;
     width: calc(100% - 5.5%);
     height: 100%;
+    perspective: 1000px;
     opacity: 0;
 
     background-color: var(--main-color-white);

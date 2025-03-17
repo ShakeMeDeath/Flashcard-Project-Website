@@ -43,6 +43,8 @@
     </div>
 </body>
 <script>
+    let flip_card = false
+
     let button1 = document.getElementById("slider-prev");
     let button2 = document.getElementById("slider-next");
     let button3 = document.getElementById("return");
@@ -87,7 +89,9 @@
 
     function CloseAllBack() {
         for (let i = 0; i< items_back.length; i++) {
-            items_back[i].style.opacity = `0`;
+            items[active].style.transform = `rotateY(${0}deg)`;
+            items_back[active].style.transform = `rotateY(${0}deg)`;
+            items_back[active].style.opacity = `0`;
         }
     }
 
@@ -104,14 +108,21 @@
         CloseAllBack()
     }
     button3.onclick = function(){
-        if (items_back[active].style.opacity == `0`) {
-            items_back[active].style.opacity = `1`;
-        }
-        else {
-            items_back[active].style.opacity = `0`;
-        }
-        
-    }
+        if (flip_card == true) {
+            items[active].style.transform = `rotateY(${180}deg)`;
 
+            items_back[active].style.opacity = `1`;
+            items_back[active].style.transform = `rotateY(${180}deg)`;
+
+            flip_card = false
+        } else {
+            items[active].style.transform = `rotateY(${0}deg)`;
+
+            items_back[active].style.opacity = `0`;
+            items_back[active].style.transform = `rotateY(${0}deg)`;
+
+            flip_card = true
+        }
+    }
 </script>
 </html>
