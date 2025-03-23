@@ -3,24 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Style_sheet.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <title>Flash Card by Shake</title>
 </head>
 <body>
     <div class="top-bar">
-        <div type="button" id="slider-reverse"><?xml version="1.0" encoding="utf-8"?>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="145.7531 69.4797 178.0744 180.1383" width="178.074px" height="180.138px">
+        <div type="button" id="slider-reverse">
+            <svg viewBox="145.7531 69.4797 178.0744 180.1383" width="178.074px" height="180.138px">
             <path d="M -89.855 4.487 L -65.775 28.573 L -64.183 26.983 C -51.216 14.295 -32.995 6.557 -14.931 6.557 C 9.011 6.557 31.372 17.146 47.135 32.672 C 62.444 48.643 72.703 71.103 72.703 94.884 C 72.703 119.05 62.235 141.918 46.673 158.146 C 30.656 173.929 7.996 184.624 -16.33 184.624 C -38.695 184.624 -58.78 176.788 -75.266 162.395 L -83.183 155.38 L -61.253 133.441 L -54.252 139.431 C -42.929 149.303 -31.531 153.616 -16.33 153.616 C -0.01 153.616 14.136 147.439 24.663 136.304 C 35.668 125.629 41.695 111.359 41.695 94.884 C 41.695 78.796 35.753 64.806 25.002 54.388 C 14.731 43.51 1.004 37.565 -14.931 37.565 C -25.512 37.565 -34.803 41.196 -42.22 48.869 L -43.847 50.497 L -19.764 74.582 L -35.268 90.086 L -105.37 90.086 L -105.37 19.989 Z" fill="currentcolor" transform="matrix(1.0000075251298384, 0, 0, 1.0000075251298384, 251.12392877011916, 64.99266964889328)"/></svg>
         </div>
         <input id="theme-switch" type="checkbox">
         <label for="theme-switch" id="theme-switch-label">
             <div></div>
         </label>
+        
+        <input id="sidebar-button" type="checkbox">
+        <label for="sidebar-button" id="sidebar-label">
+            <svg fill="currentcolor" viewBox="0 0 16 16"><path d="M2,13V11H14v2ZM2,9V7H14V9ZM2,5V3H14V5Z"></path></svg>
+        </label>
+        <div id="sidebar">
+            <div class="sidebar-title"><p>Options</p></div>
+            <div class="sidebar-options"><p>Option1</p></div>
+            <div class="sidebar-options"><p>Option2</p></div>
+            <div class="sidebar-options"><p>Option3</p></div>
+            <div class="sidebar-options"><p>Option4</p></div>
+        </div>
     </div>
     
     <div class="cards">
 
-        <div type="button" id="slider-prev"><svg style="transform: rotate(90deg);" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M8.00003 8.1716L3.41424 3.58582L0.585815 6.41424L8.00003 13.8285L15.4142 6.41424L12.5858 3.58582L8.00003 8.1716Z" fill="currentcolor"></path> </g></svg></div>
+        <div type="button" id="slider-prev"><svg style="transform: rotate(90deg);" viewBox="0 0 16 16"><path d="M8.00003 8.1716L3.41424 3.58582L0.585815 6.41424L8.00003 13.8285L15.4142 6.41424L12.5858 3.58582L8.00003 8.1716Z" fill="currentcolor"></path> </g></svg></div>
         
         <div class="slider-parent">
             <div class="slider-child">
@@ -99,7 +112,7 @@
     function loadSlider() {
         let stt = 0;
         items[active].style.transform = `scale(1) translateX(-${0*stt}%)` ;  
-        items[active].style.zIndex = items.length;
+        items[active].style.zIndex = 5;
         items[active].style.opacity = 1;
         items[active].style.filter = `blur(${0}px)`;
         items[active].style.boxShadow = `0px 0px 98px -24px rgba(0,0,0,0.75)`;
@@ -111,8 +124,8 @@
             stt++;
 
             if (i !== active) {
-                items[i].style.zIndex = -stt;
-                items[i].style.transform = `scale(${0.8}) translateX(-${50*stt}%) `;
+                items[i].style.zIndex = 5-stt;
+                items[i].style.transform = `scale(${0.8}) translateX(${50*stt}%) `;
                 items[i].style.opacity = 0.4;
                 items[i].style.filter = `blur(${5*stt}px)`;
                 items[i].style.opacity = 1.7-stt;
@@ -128,8 +141,8 @@
             
             if (i !== active) {
                 items[i].style.opacity = 2.7-stt;
-                items[i].style.zIndex = items.length-stt;
-                items[i].style.transform = `scale(0.8) translateX(${50*stt-50}%)`;
+                items[i].style.zIndex = 5-stt;
+                items[i].style.transform = `scale(0.8) translateX(-${50*stt-50}%)`;
                 items[i].style.filter = `blur(${5*stt}px)`;
                 items_back[i].style.zIndex = items.length-stt;
                 items[i].style.boxShadow = `none`;
@@ -149,23 +162,21 @@
     function ChangeThemeBlack() {
         root.style.setProperty('--changable-main-color-white', '#1C2226');
         root.style.setProperty('--changable-main-color-black', '#fff');
-        root.style.setProperty('--changable-main-color-pure-white', '#1C2226');
     }
 
     function ChangeThemeWhite() {
         root.style.setProperty('--changable-main-color-white', '#fff');
         root.style.setProperty('--changable-main-color-black', '#1C2226');
-        root.style.setProperty('--changable-main-color-pure-white', '#fff');
     }
 
     loadSlider()
-    button2.onclick = function() {
+    button1.onclick = function() {
         active = active - 1 >= 0 ? active - 1 : active;
         loadSlider()
         CloseAllBack()
     }
     loadSlider()
-    button1.onclick = function(){
+    button2.onclick = function(){
         active = active + 1 <= items.length-1 ? active + 1 : active;
         loadSlider()
         CloseAllBack()
@@ -199,16 +210,16 @@
 </script>
 <style>
     :root {
-    --slide-transition-time: 0.5s;
-    --button-transition-time: 0.3s;
+        --slide-transition-time: 0.5s;
+        --button-transition-time: 0.3s;
 
-    --changable-main-color-black: #1C2226;
-    --changable-main-color-white: #fff;
+        --changable-main-color-black: #1C2226;
+        --changable-main-color-white: #fff;
 
-    --changable-main-color-pure-white: #fffff;
+        --unchangable-main-color-black: #1C2226;
+        --unchangable-main-color-white: #fff;
 
-    --unchangable-main-color-black: #1C2226;
-    --unchangable-main-color-white: #fff;
+        --button-layer: 10;
     }
 
     body {
@@ -230,10 +241,12 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        flex-direction: row;
+        position: relative;
+
         gap: 5%;
         background-color: #1C2226;
         inset: 0;
+        z-index: 13;
     }
 
     .slider-parent {
@@ -273,7 +286,6 @@
         height: 100%;
         position: absolute;
         inset: 0;
-        z-index: -1;
         opacity: 0;
         
         
@@ -291,7 +303,7 @@
     }
 
     #slider-reverse {
-        z-index: 4;
+        z-index: var(--button-layer);
 
         background-color: transparent;
         color: var(--unchangable-main-color-white);
@@ -313,7 +325,7 @@
 
     #slider-next,
     #slider-prev {
-        z-index: 4;
+        z-index: var(--button-layer);
         height: 100px; width: 100px;
         user-select: none; cursor: pointer;
         
@@ -371,6 +383,97 @@
 
     #theme-switch:checked + #theme-switch-label div {
         left: 50px;
+    }
+
+    #sidebar-button {
+        display: none;
+    }
+    #sidebar-label {
+        position: absolute;
+        left: 0;
+        height: 100px;
+        width: 100px;
+        z-index: 12;
+    }
+    #sidebar-button + #sidebar-label svg {
+        width: 100%;
+        height: 100%;
+        transform: scale(0.9);
+        color: var(--unchangable-main-color-white);
+        transition: var(--slide-transition-time);
+    }
+    #sidebar-button:checked + #sidebar-label svg {
+        transition: var(--slide-transition-time);
+        transform: rotateZ(90deg) scale(0.9);
+    }
+
+    #sidebar-button ~ #sidebar{
+        position: absolute;
+        inset: 0;
+        width: 20vw;
+        height: 100vh;
+        background-color: var(--unchangable-main-color-black);
+        transform: translateX(-100%);
+        transition: var(--slide-transition-time);
+        z-index: 11;
+        box-shadow: none;
+    }
+    #sidebar-button:checked ~ #sidebar{
+        transition: var(--slide-transition-time);
+        transform: translateX(0%);
+        position: absolute;
+        box-shadow: 0px 0px 48px 4px rgba(0,0,0,0.75);
+    }
+    #sidebar {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        overflow: hidden;
+    }
+    #sidebar .sidebar-title {
+        inset: 0;
+        width: calc(100% - 100px);
+        height: 100px;
+        display: flex;
+        align-items: center;
+        padding-left: 100px;
+        font-family: "Oswald", sans-serif;
+        font-weight: bolder;
+        font-size: 60px;
+        color: var(--unchangable-main-color-white);
+        transition: var(--slide-transition-time);
+        user-select: none;
+        opacity: 0;
+        filter: blur(10px);
+    }
+    #sidebar-button:checked ~ #sidebar .sidebar-title {
+        filter: blur(0px);
+        opacity: 1;
+    }
+
+    #sidebar .sidebar-options {
+        padding-left: 30px;
+        padding-right: 30px;
+
+        margin-left: 15px;
+        margin-right: 15px;
+
+        border-radius: 10px;
+        color: var(--unchangable-main-color-white);
+        width: calc(100% - 90px);
+        height: 80px;
+        background-color: var(--unchangable-main-color-black);
+        display: flex;
+        align-items: center;
+        font-family: monospace;
+        font-size: x-large;
+        font-weight: bold;
+        transition: var(--slide-transition-time);
+        user-select: none;
+    }
+
+    #sidebar .sidebar-options:hover {
+        background-color: #2e363b;
     }
 </style>
 </html>
