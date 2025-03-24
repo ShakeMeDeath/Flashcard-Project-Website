@@ -25,7 +25,7 @@
         <div id="sidebar">
             <div class="sidebar-title"><p>Options</p></div>
             <div class="sidebar-options"><p>Option1</p></div>
-            <div class="sidebar-options"><p>Option2</p></div>
+            <div class="sidebar-options"><p>Option2</p><input type="range" min="20" max="100" value="60" id="font-size-slider"></div>
             <div class="sidebar-options"><p>Option3</p></div>
             <div class="sidebar-options"><p>Option4</p></div>
         </div>
@@ -97,6 +97,7 @@
 <script>
     let flip_card = false
 
+    let font_size_slider = document.getElementById("font-size-slider");
     let button1 = document.getElementById("slider-prev");
     let button2 = document.getElementById("slider-next");
     let button3 = document.getElementById("slider-reverse");
@@ -205,6 +206,10 @@
         } else {
             ChangeThemeBlack()
         }
+    });
+
+    font_size_slider.addEventListener('input', function() {
+        root.style.setProperty('--cards-font-size', `${this.value}px`);
     });
     
 </script>

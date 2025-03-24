@@ -9,6 +9,7 @@
     --unchangable-main-color-white: #fff;
 
     --button-layer: 10;
+    --cards-font-size: 60px;
 }
 
 body {
@@ -66,6 +67,7 @@ body {
     height: 70%;
     padding-left: 2%;
     padding-right: 2%;
+    font-size: calc(var(--cards-font-size) - 30px);
 }
 
 .slider-back {
@@ -199,7 +201,7 @@ body {
 #sidebar-button ~ #sidebar{
     position: absolute;
     inset: 0;
-    width: 20vw;
+    width: 370px;
     height: 100vh;
     background-color: var(--unchangable-main-color-black);
     transform: translateX(-100%);
@@ -217,7 +219,8 @@ body {
     display: flex;
     align-items: center;
     flex-direction: column;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 #sidebar .sidebar-title {
     inset: 0;
@@ -228,7 +231,7 @@ body {
     padding-left: 100px;
     font-family: "Oswald", sans-serif;
     font-weight: bolder;
-    font-size: 60px;
+    font-size: var(--cards-font-size);
     color: var(--unchangable-main-color-white);
     transition: var(--slide-transition-time);
     user-select: none;
@@ -241,8 +244,8 @@ body {
 }
 
 #sidebar .sidebar-options {
-    padding-left: 30px;
-    padding-right: 30px;
+    /* padding-left: 30px;
+    padding-right: 30px; */
 
     margin-left: 15px;
     margin-right: 15px;
@@ -255,12 +258,29 @@ body {
     display: flex;
     align-items: center;
     font-family: monospace;
-    font-size: x-large;
+    font-size: calc(var(--cards-font-size) - 35px);
     font-weight: bold;
     transition: var(--slide-transition-time);
     user-select: none;
+    display: flex;
+    justify-content: space-evenly;
 }
 
 #sidebar .sidebar-options:hover {
     background-color: #2e363b;
+}
+
+#font-size-slider {
+    appearance: none;
+    
+    width: 120px;
+    height: 15px;
+    border-radius: 10px;
+}
+#font-size-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background: linear-gradient(30deg, rgba(62,147,61,1) 0%, rgba(76,175,80,1) 2%, rgba(255,215,0,1) 60%, rgba(255,209,0,1) 94%, rgba(255,179,0,1) 100%);
+    width: 25px;
+    height: 25px;
+    border-radius: 100%;
 }
