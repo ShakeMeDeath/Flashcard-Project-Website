@@ -1,6 +1,12 @@
-let card_set = {
-        name: "Life question",
-        cards: [{
+let loaded_card = {
+        CARD_INDEX: 0,
+        CARD_PROGRESSION: [],
+        CARD_NAME: "Life question",
+        CARD_SET : [],
+        CARD_ELEMENT: null
+}
+
+let cardset1 = [{
                 front: "what is canada ?",
                 back: "contry"
         },
@@ -23,20 +29,20 @@ let card_set = {
                 front: "what is light bulb ?",
                 back: "glassy thing"
         }]
-};
-let card_index = 0
-let card_progression_list = [];
 
-const AWNSER_STATUS = {
+let card_ui_wrapper = document.querySelector(".card-ui-wrapper");
+
+const awnser_status = {
         UNKNOWN: 0,
         KNOWN: 1,
         NEW_SET: 2
 };
 
 // 
-// 
+//
 
-let card = document.querySelector(".card");
+loaded_card.CARD_ELEMENT = document.querySelector(".card");
+
 let card_container = document.querySelector(".card-container");
 
 //  progress bar
@@ -49,32 +55,84 @@ function changeProgressBar(num, max) {
         progress_bar.style.width = `${pourcentage}%`;
 };
 
+function isCardSetSelected() {
+        return loaded_card.CARD_SET !== null;
+}
+
 function isMenuBlocking() {
+        if (document.querySelector(".dim") != null) {
+                if (document.querySelector(".dim.disappear") != null) {
+                        return false
+                } else {
+                        return true
+                }
+        }
+
         return document.querySelector(".dim") != null;
 }
 
+function restartCardSet() {
+        changeFlashcardSet(loaded_card.CARD_SET);
+}
+
+function closeEndMenu() {
+
+        let endMenu = document.querySelector(".dim");
+
+        endMenu.classList.add("disappear");
+
+        endMenu.addEventListener("animationend", function() {
+                endMenu.remove();
+        }, { once: true });
+}
+
 function triggerEndMenu() {
+        toggleHide(loaded_card.CARD_ELEMENT, true)
+
         let clone = end_menu_template.content.cloneNode(true);
 
-        clone.querySelector(".fails-num").textContent = card_progression_list.filter(x => x == 0).length;
-        clone.querySelector(".success-num").textContent = card_progression_list.filter(x => x == 1).length; 
+        clone.querySelector(".fails-num").textContent = loaded_card.CARD_PROGRESSION.filter(x => x == 0).length;
+        clone.querySelector(".success-num").textContent = loaded_card.CARD_PROGRESSION.filter(x => x == 1).length;
+
+        // ctrl btns menu
+        clone.querySelector(".redo-btn").addEventListener("click", function() {
+                closeEndMenu()
+                restartCardSet()
+        })
+
+        clone.querySelector(".exit-btn").addEventListener("click", function() {
+                closeEndMenu()
+                toggleHide(card_ui_wrapper, true)
+                loaded_card.CARD_SET = null;
+        })
 
         document.body.appendChild(clone);
 }
 
-function saveProgress(save_list, awnserStatus) {
-        save_list.push(awnserStatus);
+function saveProgress(awnserStatus) {
+        loaded_card.CARD_PROGRESSION.push(awnserStatus);
+}
+
+function toggleHide(element, hideBool) {
+        if (hideBool === true) {
+                element.style.visibility = "hidden";
+        } else {
+                element.style.visibility = "visible";
+        }
 }
 
 function gotoNextCard(awnserStatus) {
-        saveProgress(card_progression_list, awnserStatus)
+        saveProgress(awnserStatus)
 
-        if (card_index+1 >= card_set.cards.length) {
+        if (loaded_card.CARD_INDEX+1 >= loaded_card.CARD_SET.length) {
                 triggerEndMenu()
         }
 
-        card_index++
-        changeCard(card_set, card_index, awnserStatus)
+        loaded_card.CARD_INDEX++
+        changeCard(loaded_card.CARD_INDEX)
+
+        changeProgressBar(loaded_card.CARD_INDEX, loaded_card.CARD_SET.length - 1);
+        doCardAnim(awnserStatus, loaded_card.CARD_NAME);
 }
 
 // Card Flipping
@@ -83,20 +141,24 @@ function flipCard(element) {
         if (isMenuBlocking() == false) element.classList.toggle("flip");
 };
 
-card.addEventListener("click", function() {
+loaded_card.CARD_ELEMENT.addEventListener("click", function() {
         flipCard(this)
 });
 
 document.body.addEventListener('keydown', function(event) {
-        if (event.code === 'Space') {
-                flipCard(card)
+        if (isCardSetSelected() === true) {
 
-        } else if (event.code === 'ArrowRight') {
-                if (isMenuBlocking() == false) gotoNextCard(AWNSER_STATUS.KNOWN);
-
-        } else if (event.code === 'ArrowLeft') {
-                if (isMenuBlocking() == false) gotoNextCard(AWNSER_STATUS.UNKNOWN);
+                if (event.code === 'Space') {
+                        if (isMenuBlocking() === false) flipCard(loaded_card.CARD_ELEMENT)
+        
+                } else if (event.code === 'ArrowRight') {
+                        if (isMenuBlocking() === false) gotoNextCard(awnser_status.KNOWN);
+        
+                } else if (event.code === 'ArrowLeft') {
+                        if (isMenuBlocking() === false) gotoNextCard(awnser_status.UNKNOWN);
+                }
         }
+
 });
 
 // button detection
@@ -105,10 +167,10 @@ let unkown_btn = document.getElementById("unknown-btn");
 let kown_btn = document.getElementById("known-btn");
 
 unkown_btn.addEventListener("click", function() {
-        if (isMenuBlocking() == false) gotoNextCard(AWNSER_STATUS.UNKNOWN);
+        if (isMenuBlocking() == false) gotoNextCard(awnser_status.UNKNOWN);
 });
 kown_btn.addEventListener("click", function() {
-        if (isMenuBlocking() == false) gotoNextCard(AWNSER_STATUS.KNOWN);
+        if (isMenuBlocking() == false) gotoNextCard(awnser_status.KNOWN);
 });
 
 function isCardFliped() {
@@ -133,17 +195,17 @@ function doCardAnim(awnserStatus, card_name) {
 
         let transition_card = cardAnim_clone.querySelector(".transition-card");
 
-        if (awnserStatus === AWNSER_STATUS.KNOWN) {
+        if (awnserStatus === awnser_status.KNOWN) {
                 transition_card.classList.add("card-known");
                 cardAnim_clone.querySelector(".transition-card").textContent = "Know";
         }
         
-        else if (awnserStatus === AWNSER_STATUS.UNKNOWN) {
+        else if (awnserStatus === awnser_status.UNKNOWN) {
                 transition_card.classList.add("card-unknown");
                 cardAnim_clone.querySelector(".transition-card").textContent = "Still Learning";
         }
         // should i separzate ?????
-        else if (awnserStatus === AWNSER_STATUS.NEW_SET) {
+        else if (awnserStatus === awnser_status.NEW_SET) {
                 transition_card.classList.add("new-card-set");
                 cardAnim_clone.querySelector(".transition-card").textContent = `${card_name}`;
 
@@ -156,31 +218,41 @@ function doCardAnim(awnserStatus, card_name) {
         }, 501);
 }
 
-function changeCard(card_list, index, awnserStatus) {
+function changeCard(index) {
 
-        changeProgressBar(index, card_list.cards.length - 1);
-        doCardAnim(awnserStatus, card_list.name);
+        // changeProgressBar(index, card_list.cards.length - 1);
+        // doCardAnim(awnserStatus, card_list.name);
 
 
         // flip without animation
-        if (isCardFliped() == true) {
-                card.style.transition = "none";
-                flipCard(card);
-                card.offsetHeight;
-                card.style.transition = "transform 0.6s ease";
+        if (isCardFliped() === true) {
+                loaded_card.CARD_ELEMENT.style.transition = "none";
+                flipCard(loaded_card.CARD_ELEMENT);
+                loaded_card.CARD_ELEMENT.offsetHeight;
+                loaded_card.CARD_ELEMENT.style.transition = "transform 0.6s ease";
         }
         
         // modify the card
-        card.querySelector(".card-front").textContent = card_list.cards[index].front;
-        card.querySelector(".card-back").textContent = card_list.cards[index].back;
+        if (isMenuBlocking() === false) {
+                loaded_card.CARD_ELEMENT.querySelector(".card-front").textContent = loaded_card.CARD_SET[index].front;
+                loaded_card.CARD_ELEMENT.querySelector(".card-back").textContent = loaded_card.CARD_SET[index].back;
+        }
 }
 
 // flashcard_set
 
 function changeFlashcardSet(new_card_set) {
-        card_set = new_card_set
-        card_index = 0
-        changeCard(card_set, card_index, AWNSER_STATUS.NEW_SET)
+        toggleHide(loaded_card.CARD_ELEMENT, false)
+        toggleHide(card_ui_wrapper, false)
+
+        loaded_card.CARD_PROGRESSION = [];
+        loaded_card.CARD_SET = new_card_set
+        loaded_card.CARD_INDEX = 0
+
+        changeCard(loaded_card.CARD_INDEX)
+
+        changeProgressBar(loaded_card.CARD_INDEX, loaded_card.CARD_SET.length - 1);
+        doCardAnim(awnser_status.NEW_SET, loaded_card.CARD_NAME);
 }
 
-changeFlashcardSet(card_set);
+changeFlashcardSet(cardset1);
