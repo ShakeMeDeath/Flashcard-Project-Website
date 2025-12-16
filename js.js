@@ -27,6 +27,15 @@ let card_set = {
 let card_index = 0
 let card_progression_list = [];
 
+const AWNSER_STATUS = {
+        UNKNOWN: 0,
+        KNOWN: 1,
+        NEW_SET: 2
+};
+
+// 
+// 
+
 let card = document.querySelector(".card");
 let card_container = document.querySelector(".card-container");
 
@@ -34,14 +43,44 @@ let card_container = document.querySelector(".card-container");
 
 let progress_bar = document.querySelector(".progress-bar");
 
-function changeProgressBar(pourcentage) {
+function changeProgressBar(num, max) {
+
+        let pourcentage = num * 100 / (max + 1); // "+1" is for offseting the bar, so it doesnt go out the screen
         progress_bar.style.width = `${pourcentage}%`;
 };
+
+function isMenuBlocking() {
+        return document.querySelector(".dim") != null;
+}
+
+function triggerEndMenu() {
+        let clone = end_menu_template.content.cloneNode(true);
+
+        clone.querySelector(".fails-num").textContent = card_progression_list.filter(x => x == 0).length;
+        clone.querySelector(".success-num").textContent = card_progression_list.filter(x => x == 1).length; 
+
+        document.body.appendChild(clone);
+}
+
+function saveProgress(save_list, awnserStatus) {
+        save_list.push(awnserStatus);
+}
+
+function gotoNextCard(awnserStatus) {
+        saveProgress(card_progression_list, awnserStatus)
+
+        if (card_index+1 >= card_set.cards.length) {
+                triggerEndMenu()
+        }
+
+        card_index++
+        changeCard(card_set, card_index, awnserStatus)
+}
 
 // Card Flipping
 
 function flipCard(element) {
-        if (document.querySelector(".dim") == null) element.classList.toggle("flip");
+        if (isMenuBlocking() == false) element.classList.toggle("flip");
 };
 
 card.addEventListener("click", function() {
@@ -51,13 +90,12 @@ card.addEventListener("click", function() {
 document.body.addEventListener('keydown', function(event) {
         if (event.code === 'Space') {
                 flipCard(card)
-                console.log("hehe")
+
         } else if (event.code === 'ArrowRight') {
-                if (document.querySelector(".dim") == null) changeCard(card_set, card_index+1, true);
-                card_index++
+                if (isMenuBlocking() == false) gotoNextCard(AWNSER_STATUS.KNOWN);
+
         } else if (event.code === 'ArrowLeft') {
-                if (document.querySelector(".dim") == null) changeCard(card_set, card_index+1, false);
-                card_index++
+                if (isMenuBlocking() == false) gotoNextCard(AWNSER_STATUS.UNKNOWN);
         }
 });
 
@@ -67,79 +105,65 @@ let unkown_btn = document.getElementById("unknown-btn");
 let kown_btn = document.getElementById("known-btn");
 
 unkown_btn.addEventListener("click", function() {
-        if (document.querySelector(".dim") == null) changeCard(card_set, card_index+1, false);
-        card_index++
+        if (isMenuBlocking() == false) gotoNextCard(AWNSER_STATUS.UNKNOWN);
 });
 kown_btn.addEventListener("click", function() {
-        if (document.querySelector(".dim") == null) changeCard(card_set, card_index+1, true);
-        card_index++
+        if (isMenuBlocking() == false) gotoNextCard(AWNSER_STATUS.KNOWN);
 });
+
+function isCardFliped() {
+        return document.querySelector(".flip") != null;
+}
 
 // Card Swicthing
 
 const card_template = document.getElementById("card-template");
 const end_menu_template = document.getElementById("finnish-screen");
 
-function changeCard(card_list, index, state) {
+function doCardAnim(awnserStatus, card_name) {
 
-        // store card result
-        
-        if (state != 2) {
-                card_progression_list.push(state)
-        }
+        // let transition_card_wrapper = document.createElement("div");
+        // transition_card_wrapper.classList.add("transition-card-wrapper")
 
-        // change progress bar pourcentage
+        // let transition_card = document.createElement("div");
+        // transition_card.classList.add("transition-card");
 
-        let fill_pourcentage = index * 100 / (card_list.cards.length - 1);
-        if (fill_pourcentage > 100) {
-                fill_pourcentage = 100;
+        const cardAnim_template = document.getElementById("card-animation");
+        let cardAnim_clone = cardAnim_template.content.cloneNode(true);
 
-                if (document.querySelector(".dim") == null) {
-                        let clone = end_menu_template.content.cloneNode(true);
+        let transition_card = cardAnim_clone.querySelector(".transition-card");
 
-                        clone.querySelector(".fails-num").textContent = card_progression_list.filter(x => x == 0).length;
-                        clone.querySelector(".success-num").textContent = card_progression_list.filter(x => x == 1).length; 
-
-                        document.body.appendChild(clone);
-
-
-                }
-        }
-
-        changeProgressBar(fill_pourcentage);
-
-        // create the transition card
-
-        let transition_card_wrapper = document.createElement("div");
-        transition_card_wrapper.classList.add("transition-card-wrapper")
-
-        let transition_card = document.createElement("div");
-        transition_card.classList.add("transition-card");
-
-        if (state == 1) { // known
-                transition_card.textContent = "Know";
+        if (awnserStatus === AWNSER_STATUS.KNOWN) {
                 transition_card.classList.add("card-known");
-                transition_card_wrapper.classList.add("card-known");
+                cardAnim_clone.querySelector(".transition-card").textContent = "Know";
         }
-        else if (state == 0) { // unknown
-                transition_card.textContent = "Still Learning";
+        
+        else if (awnserStatus === AWNSER_STATUS.UNKNOWN) {
                 transition_card.classList.add("card-unknown");
-                transition_card_wrapper.classList.add("card-unknown");
+                cardAnim_clone.querySelector(".transition-card").textContent = "Still Learning";
         }
-        else if (state == 2) {
-                transition_card.textContent = `${card_list.name}`;
+        // should i separzate ?????
+        else if (awnserStatus === AWNSER_STATUS.NEW_SET) {
                 transition_card.classList.add("new-card-set");
-                transition_card_wrapper.classList.add("new-card-set");
-        } else {
-                console.log("invalid changeCard() state !")
+                cardAnim_clone.querySelector(".transition-card").textContent = `${card_name}`;
+
         }
 
-        card_container.appendChild(transition_card_wrapper);
-        transition_card_wrapper.appendChild(transition_card);
+        card_container.appendChild(cardAnim_clone);
+
+        setTimeout(() => {
+                document.querySelector(".transition-card-wrapper").remove();   // remove old card
+        }, 501);
+}
+
+function changeCard(card_list, index, awnserStatus) {
+
+        changeProgressBar(index, card_list.cards.length - 1);
+        doCardAnim(awnserStatus, card_list.name);
+
 
         // flip without animation
-
-        if (document.querySelector(".flip") != null) {
+        if (isCardFliped() == true) {
                 card.style.transition = "none";
                 flipCard(card);
                 card.offsetHeight;
@@ -147,15 +171,8 @@ function changeCard(card_list, index, state) {
         }
         
         // modify the card
-
         card.querySelector(".card-front").textContent = card_list.cards[index].front;
         card.querySelector(".card-back").textContent = card_list.cards[index].back;
-
-        // remove the transition card
-
-        setTimeout(() => {
-                document.querySelector(".transition-card-wrapper").remove();   // remove old card
-        }, 501);
 }
 
 // flashcard_set
@@ -163,7 +180,7 @@ function changeCard(card_list, index, state) {
 function changeFlashcardSet(new_card_set) {
         card_set = new_card_set
         card_index = 0
-        changeCard(card_set, 0, 2)
+        changeCard(card_set, card_index, AWNSER_STATUS.NEW_SET)
 }
 
 changeFlashcardSet(card_set);

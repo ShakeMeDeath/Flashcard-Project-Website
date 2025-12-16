@@ -150,12 +150,12 @@ body {
         height: calc(100% - 80px);
 }
 
-.transition-card-wrapper.card-known {
+.transition-card-wrapper:has(>.card-known) {
         --card-slide: 60%, 0%;
         --card-tilt: -7deg;
 }
 
-.transition-card-wrapper.card-unknown {
+.transition-card-wrapper:has(>.card-unknown) {
         --card-slide: -60%, 0%;
         --card-tilt: 7deg;
 }
@@ -178,7 +178,7 @@ body {
         /* --card-tilt: 7deg; */
         color: black;
 }
-.transition-card-wrapper.new-card-set {
+.transition-card-wrapper:has(>.new-card-set) {
         --card-slide: 0%, -60%;
         animation: changeCardSlide 0.5s ease-in-out forwards;
         /* --card-tilt: 7deg; */
