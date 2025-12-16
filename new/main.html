@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>FlashCards</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+        <div class="screen-container">
+                <div class="tab-button-container">
+                        <div class="tab-button" type="button" data-tab-num="0">FlashCards</div>
+                        <div class="tab-button" type="button" data-tab-num="1">Revise</div>
+                        <div class="tab-button" type="button" data-tab-num="2">Settings</div>
+                        <div class="tab-button-overlay"></div>
+                </div>
+                <div class="tab-container">
+                        <div class="tab-content" data-tab-num="0">
+                                <input type="checkbox" id="sidebar-button-input">
+                                <label class="sidebar-button" for="sidebar-button-input">
+                                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4 18L20 18" stroke="currentcolor" stroke-width="2" stroke-linecap="round"></path> <path d="M4 12L20 12" stroke="currentcolor" stroke-width="2" stroke-linecap="round"></path> <path d="M4 6L20 6" stroke="currentcolor" stroke-width="2" stroke-linecap="round"></path> </g></svg>
+                                </label>
+                                <div class="flashcard-sidebar">
+                                        <div class="sidebar-item">
+                                                <input style="display: none;" type="file" id="open-folder-input" webkitdirectory directory multiple/>
+                                                <label for="open-folder-input" class="open-folder-btn">
+                                                        Open Folder
+                                                </label>
+                                        </div>
+                                </div>
+                                <div class="flashcard-screen">
+                                        <div class="flashcard-area"></div>
+                                </div>
+                        </div>
+                        <div class="tab-content" data-tab-num="1">
+                        </div>
+                        <div class="tab-content" data-tab-num="2"></div>
+                </div>
+        </div>
+        <template id="card-template">
+                <div class="card-container">
+                        <div class="card-item">
+                                <div class="card-front"></div>
+                                <div class="card-back"></div>
+                        </div>
+                </div>
+                <div class="card-btn">
+                        <div class="know-btn"></div>
+                        <div class="learn-btn"></div>
+                </div>
+        </template>
+</body>
+<script src="js.js"></script>
+</html>

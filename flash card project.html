@@ -1,201 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="Style_sheet.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <title>Flash Card by Shake</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="Style_sheet.css">
 </head>
 <body>
-    <div class="top-bar">
-        <div type="button" id="slider-reverse"><?xml version="1.0" encoding="utf-8"?>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="145.7531 69.4797 178.0744 180.1383" width="178.074px" height="180.138px">
-            <path d="M -89.855 4.487 L -65.775 28.573 L -64.183 26.983 C -51.216 14.295 -32.995 6.557 -14.931 6.557 C 9.011 6.557 31.372 17.146 47.135 32.672 C 62.444 48.643 72.703 71.103 72.703 94.884 C 72.703 119.05 62.235 141.918 46.673 158.146 C 30.656 173.929 7.996 184.624 -16.33 184.624 C -38.695 184.624 -58.78 176.788 -75.266 162.395 L -83.183 155.38 L -61.253 133.441 L -54.252 139.431 C -42.929 149.303 -31.531 153.616 -16.33 153.616 C -0.01 153.616 14.136 147.439 24.663 136.304 C 35.668 125.629 41.695 111.359 41.695 94.884 C 41.695 78.796 35.753 64.806 25.002 54.388 C 14.731 43.51 1.004 37.565 -14.931 37.565 C -25.512 37.565 -34.803 41.196 -42.22 48.869 L -43.847 50.497 L -19.764 74.582 L -35.268 90.086 L -105.37 90.086 L -105.37 19.989 Z" fill="currentcolor" transform="matrix(1.0000075251298384, 0, 0, 1.0000075251298384, 251.12392877011916, 64.99266964889328)"/></svg>
+        <div class="card-ui-wrapper">
+                <div class="card-container">
+                        <div class="card">
+                                <div class="card-face card-front"> front </div>
+                                <div class="card-face card-back"> back </div>
+                        </div>
+                </div>
+                <div class="card-ctrl-container">
+                        <div class="progress-bar-container">
+                                <div class="progress-bar"></div>
+                        </div>
+                        <div class="card-ctrl-btn" id="unknown-btn" type="button"></div>
+                        <div class="card-ctrl-btn" id="known-btn" type="button"></div>
+                </div>
         </div>
-        <input id="theme-switch" type="checkbox">
-        <label for="theme-switch" id="theme-switch-label">
-            <div></div>
-        </label>
-    </div>
-    
-    <div class="cards">
-
-        <div type="button" id="slider-prev"><svg style="transform: rotate(90deg);" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M8.00003 8.1716L3.41424 3.58582L0.585815 6.41424L8.00003 13.8285L15.4142 6.41424L12.5858 3.58582L8.00003 8.1716Z" fill="currentcolor"></path> </g></svg></div>
-        
-        <div class="slider-parent">
-            <div class="slider-child">
-                <h1>Slider 1</h1>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequuntur dolorum veritatis qui excepturi totam delectus provident ipsam deleniti distinctio quia.</p>
-                <div class="slider-back">
-                    <h1>Back 1</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro, labore.</p>
-                </div>
-            </div>
-            
-            <div class="slider-child">
-                <h1>Slider 2</h1>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequuntur dolorum veritatis qui excepturi totam delectus provident ipsam deleniti distinctio quia.</p>
-                <div class="slider-back">
-                    <h1>Back 2</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro, labore.</p>
-                </div>
-            </div>
-            
-            <div class="slider-child">
-                <h1>Slider 3</h1>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequuntur dolorum veritatis qui excepturi totam delectus provident ipsam deleniti distinctio quia.</p>
-                <div class="slider-back">
-                    <h1>Back 3</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro, labore.</p>
-                </div>
-            </div>
-
-            <div class="slider-child">
-                <h1>Slider 4</h1>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequuntur dolorum veritatis qui excepturi totam delectus provident ipsam deleniti distinctio quia.</p>
-                <div class="slider-back">
-                    <h1>Back 4</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro, labore.</p>
-                </div>
-            </div>
-            
-            <div class="slider-child">
-                <h1>Slider 5</h1>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequuntur dolorum veritatis qui excepturi totam delectus provident ipsam deleniti distinctio quia.</p>
-                <div class="slider-back">
-                    <h1>Back 5</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro, labore.</p>
-                </div>
-            </div>
-            
-            <div class="slider-child">
-                <h1>Slider 6</h1>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequuntur dolorum veritatis qui excepturi totam delectus provident ipsam deleniti distinctio quia.</p>
-                <div class="slider-back">
-                    <h1>Back 6</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro, labore.</p>
-                </div>
-            </div>
-        </div>
-
-        <div type="button" id="slider-next"><svg style="transform: rotate(-90deg);" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M8.00003 8.1716L3.41424 3.58582L0.585815 6.41424L8.00003 13.8285L15.4142 6.41424L12.5858 3.58582L8.00003 8.1716Z" fill="currentcolor"></path> </g></svg></div>
-    </div>
 </body>
-<script>
-    let flip_card = false
-
-    let button1 = document.getElementById("slider-prev");
-    let button2 = document.getElementById("slider-next");
-    let button3 = document.getElementById("slider-reverse");
-
-    let theme_toggle = document.getElementById("theme-switch")
-    const root = document.documentElement;
-
-    let items = document.querySelectorAll(".slider-child");
-    let items_back = document.querySelectorAll(".slider-back");
-
-    let active = 0;
-    
-    function loadSlider() {
-        let stt = 0;
-        items[active].style.transform = `scale(1) translateX(-${0*stt}%)` ;  
-        items[active].style.zIndex = items.length;
-        items[active].style.opacity = 1;
-        items[active].style.filter = `blur(${0}px)`;
-        items[active].style.boxShadow = `0px 0px 98px -24px rgba(0,0,0,0.75)`;
-
-        items_back[active].style.transform = `none`;
-        items_back[active].style.zIndex = 1;
-    
-        for (let i = active + 1; i < items.length; i++) {
-            stt++;
-
-            if (i !== active) {
-                items[i].style.zIndex = -stt;
-                items[i].style.transform = `scale(${0.8}) translateX(-${50*stt}%) `;
-                items[i].style.opacity = 0.4;
-                items[i].style.filter = `blur(${5*stt}px)`;
-                items[i].style.opacity = 1.7-stt;
-                items[i].style.boxShadow = `none`;
-                items_back[i].style.zIndex = -stt;
-            }
-        }
-        
-        stt = 0;
-        
-        for (let i = active ; i >= 0; i--) {
-            stt++;
-            
-            if (i !== active) {
-                items[i].style.opacity = 2.7-stt;
-                items[i].style.zIndex = items.length-stt;
-                items[i].style.transform = `scale(0.8) translateX(${50*stt-50}%)`;
-                items[i].style.filter = `blur(${5*stt}px)`;
-                items_back[i].style.zIndex = items.length-stt;
-                items[i].style.boxShadow = `none`;
-            }
-        }
-    }
-
-    function CloseAllBack() {
-        for (let i = 0; i< items_back.length; i++) {
-            items[active].style.transform = `rotateY(${0}deg)`;
-            items_back[active].style.transform = `rotateY(${0}deg)`;
-            items_back[active].style.opacity = 0;
-            flip_card = false
-        }
-    }
-
-    function ChangeThemeBlack() {
-        root.style.setProperty('--changable-main-color-white', '#1C2226');
-        root.style.setProperty('--changable-main-color-black', '#fff');
-        root.style.setProperty('--changable-main-color-pure-white', '#1C2226');
-    }
-
-    function ChangeThemeWhite() {
-        root.style.setProperty('--changable-main-color-white', '#fff');
-        root.style.setProperty('--changable-main-color-black', '#1C2226');
-        root.style.setProperty('--changable-main-color-pure-white', '#fff');
-    }
-
-    loadSlider()
-    button2.onclick = function() {
-        active = active - 1 >= 0 ? active - 1 : active;
-        loadSlider()
-        CloseAllBack()
-    }
-    loadSlider()
-    button1.onclick = function(){
-        active = active + 1 <= items.length-1 ? active + 1 : active;
-        loadSlider()
-        CloseAllBack()
-    }
-    button3.onclick = function(){
-        if (!flip_card) {
-            items[active].style.transform = `rotateY(${180}deg)`;
-
-            items_back[active].style.opacity = `1`;
-            items_back[active].style.transform = `rotateY(${180}deg)`;
-
-            flip_card = true
-        } else {
-            items[active].style.transform = `rotateY(${0}deg)`;
-
-            items_back[active].style.opacity = `0`;
-            items_back[active].style.transform = `rotateY(${0}deg)`;
-
-            flip_card = false   
-        }
-    }
-
-    theme_toggle.addEventListener("change", function() {
-        if (!this.checked) {
-            ChangeThemeWhite()
-        } else {
-            ChangeThemeBlack()
-        }
-    });
-    
-</script>
+<template id="card-template">
+        <div class="card">
+                <div class="card-face card-front"> front </div>
+                <div class="card-face card-back"> back </div>
+        </div>
+</template>
+<template id="finnish-screen">
+        <div class="dim">
+                <div class="menu-wrapper">
+                        <div class="menu">
+                                <p class="end-menu-text">You finnished !</p>
+                                <div class="progress-info">
+                                        <div class="card-end-info fails-num"></div>
+                                        <div class="card-end-info success-num"></div>
+                                </div>
+                                <div class="menu-ctrl-container">
+                                        <div class="menu-ctrl-btn redo">Redo</div>
+                                        <div class="menu-ctrl-btn exit">Exit</div>
+                                </div>
+                        </div>
+                </div>
+        </div>
+</template>
+<script src="js.js"></script>
 </html>

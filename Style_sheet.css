@@ -1,174 +1,257 @@
-:root {
-    --slide-transition-time: 0.5s;
-    --button-transition-time: 0.3s;
-
-    --changable-main-color-black: #1C2226;
-    --changable-main-color-white: #fff;
-
-    --changable-main-color-pure-white: #fffff;
-
-    --unchangable-main-color-black: #1C2226;
-    --unchangable-main-color-white: #fff;
-}
-
 body {
-    position: absolute;
-    inset: 0px;
-
-    transition: var(--slide-transition-time);
-    background-color: var(--changable-main-color-white);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    margin: 0;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
 }
 
-.top-bar {
-    height: 100px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
-    gap: 5%;
-    background-color: #1C2226;
-    inset: 0;
+/* Card */
+
+.card-ui-wrapper {
+        width: 50%;
+        height: 80%;
+        background-color: aqua;
+        display: grid;
+        grid-template-rows: 5fr 1fr;
+}
+.card-container {
+        background-color: blue;
+        perspective: 1000px;
+}
+.card {
+        width: calc(100% - 80px);
+        height: calc(100% - 80px);
+        position: absolute;
+        transform-style: preserve-3d;
+        transition: transform 0.6s ease;
+        cursor: pointer;
+        inset: 40px;
 }
 
-.slider-parent {
-    position: relative;
-    height: 100%;
-    width: 80%;
+.card-front {
+        background: #ffffff;
+        border: 2px solid #ccc;
+}
+.card-back {
+        background: #f4f4f4;
+        border: 2px solid #ccc;
+        transform: rotateX(180deg);
 }
 
-.cards {
-    width: 100%;
-    height: calc(100% - 100px);
-    overflow: hidden;
-    transition: var(--slide-transition-time);
+.card-face {
+        user-select: none;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
 
-    flex-direction: row;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-size: 24px;
+        border-radius: 12px;
 }
 
-.slider-child {
-    overflow: hidden;
-    position: absolute;
-    top: calc(50% - (74% / 2));
-    left: calc(50% - (74% / 2));
-    
-    width: 70%;
-    height: 70%;
-    padding-left: 2%;
-    padding-right: 2%;
+.card.flip {
+        transform: rotateX(180deg);
 }
 
-.slider-back {
-    padding-left: 4%;
-    padding-right: 4%;
-    width: calc(100% - 8%);
-    height: 100%;
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    opacity: 0;
-    
-    
+/* Card Ctrl panel */
+
+.card-ctrl-container {
+        background-color: blueviolet;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: end;
+        position: relative;
+}
+.card-ctrl-btn {
+        width: 150px;
+        height: 80%;
 }
 
-.slider-back, .slider-child{
-    transition: var(--slide-transition-time);
-    background-color: var(--unchangable-main-color-white);
-    color: var(--unchangable-main-color-black);
-    text-align: center;
-    user-select: none;
-    border-radius: 10px;
-    font-family: monospace;
-    
+.card-ctrl-btn#unknown-btn {
+        background-color: red;
+}
+.card-ctrl-btn#known-btn {
+        background-color: green;
 }
 
-#slider-reverse {
-    z-index: 4;
-
-    background-color: transparent;
-    color: var(--unchangable-main-color-white);
-    border-radius: 100%;
-    user-select: none; cursor: pointer;
-
-    display: flex;
-    justify-content: center; align-items: center;
-
-    transform: scale(1);
-    transition: var(--button-transition-time);
-    height: 80px; width: 80px;
+.progress-bar-container {
+        width: 100%;
+        height: 10px;
+        position: absolute;
+        inset: 0;
 }
 
-#slider-reverse > svg {
-    height: calc(100% - 20px); width: calc(100% - 20px);
-    filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.5));
+.progress-bar {
+        height: 100%;
+        width: 0%;
+        background-color: chocolate;
+        transition: width 0.3s ease-in-out;
+        border-radius: 5px;
 }
 
-#slider-next,
-#slider-prev {
-    z-index: 4;
-    height: 100px; width: 100px;
-    user-select: none; cursor: pointer;
-    
-    background-color: transparent;
-    display: flex;
-    justify-content: center; align-items: center;
-    
-    transform: scale(1);
-    transition: var(--button-transition-time);
-    animation-iteration-count: 1;
+/* Change card Anim */
+
+.transition-card {
+        background: #ffffff;
+        border: 2px solid #ccc;
+        border-radius: 12px;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        animation: changeCardTilt 0.5s ease-in-out forwards;
+        z-index: 2;
+        font-size: 3rem;
+        font-weight: 600;
 }
 
-#slider-next:hover, #slider-prev:hover, #slider-reverse:hover {
-    transform: scale(1.2);
-    transition: var(--button-transition-time);
+.transition-card.card-known {
+        color: green;
+        --card-slide: 60%, 0%;
+        --card-tilt: -7deg;
 }
 
-#slider-prev > svg, #slider-next > svg {
-    width: 99px; height: 99px;
-    transform: rotate(90deg);
-    filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.5));
-    color: var(--changable-main-color-black);
-    
+.transition-card.card-unknown {
+        color: red;
+        --card-slide: -60%, 0%;
+        --card-tilt: 7deg;
 }
 
-#theme-switch {
-    display: none;
+@keyframes changeCardTilt {
+        0% {
+                transform: scale(0.95);
+        }
+        40% {
+                
+                transform: scale(1.05) rotate(var(--card-tilt)); /* -7deg */
+                opacity: 1;
+        }
+
+        100% {
+                transform: scale(1.05) rotate(0deg);
+                opacity: 0;
+        }
 }
 
-#theme-switch-label {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 80px;
-    height: 38px;
-    background-color: var(--unchangable-main-color-white);
-    border-radius: calc(38px / 2);
-    position: relative;
-    cursor: pointer;
-    transition: background 0.3s ease-in-out;
-    filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.5));
+.transition-card-wrapper {
+        position: absolute;
+        animation: changeCardSlide 0.5s ease-in-out forwards;
+        inset: 40px;
+        width: calc(100% - 80px);
+        height: calc(100% - 80px);
 }
 
-#theme-switch-label div {
-    position: absolute;
-    top: 50%;
-    left: 5px;
-    width: 25px;
-    height: 25px;
-    background-color: var(--unchangable-main-color-black);
-    border-radius: 50%;
-    transform: translateY(-50%);
-    transition: 0.3s ease-in-out;
+.transition-card-wrapper.card-known {
+        --card-slide: 60%, 0%;
+        --card-tilt: -7deg;
 }
 
-#theme-switch:checked + #theme-switch-label div {
-    left: 50px;
+.transition-card-wrapper.card-unknown {
+        --card-slide: -60%, 0%;
+        --card-tilt: 7deg;
+}
+
+@keyframes changeCardSlide {
+        0%,
+        40% {
+                
+                transform: translate(0%, 0%);
+        }
+
+        100% {
+                transform: translate(var(--card-slide)); /* 60% */
+        }
+}
+
+.transition-card.new-card-set {
+        --card-tilt: 0deg;
+        animation: changeCardTilt 0.5s ease-in-out forwards;
+        /* --card-tilt: 7deg; */
+        color: black;
+}
+.transition-card-wrapper.new-card-set {
+        --card-slide: 0%, -60%;
+        animation: changeCardSlide 0.5s ease-in-out forwards;
+        /* --card-tilt: 7deg; */
+        color: black;
+}
+
+/* Dim Menu pop */
+
+.dim {
+        animation: Appear 1.2s ease-in-out;
+        position: absolute;
+        inset: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 3;
+}
+.menu-wrapper {
+        width: 52%;
+        height: 70%;
+}
+.menu {
+        background-color: deeppink;
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-rows: 2fr 1fr 1fr;
+}
+.end-menu-text {
+        margin: 0;
+        font-size: 3rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+}
+.menu-ctrl-container {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+}
+.menu-ctrl-btn {
+        width: 150px;
+        height: 60%;
+        background-color: goldenrod;
+}
+
+@keyframes Appear {
+        0% {
+                opacity: 0;
+        }
+        75% {
+                opacity: 0;
+        }
+        100%{
+                opacity: 1;
+        }
+}
+
+.progress-info {
+        display: flex;
+        align-items: start;
+        justify-content: space-evenly;
+}
+.card-end-info {
+        width: 200px;
+        height: 60%;
+}
+.fails-num {
+        background-color: red;
+}
+.success-num {
+        background-color: green;
 }

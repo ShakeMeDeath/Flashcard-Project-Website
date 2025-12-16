@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="css.css">
+</head>
+<body>
+        <div class="card-container">
+                <div class="card" id="card">
+                        <div class="card-face card-front">
+                                Front text
+                        </div>
+                        <div class="card-face card-back">
+                                Back text
+                        </div>
+                </div>
+        </div>
+</body>
+<script>
+        const card = document.getElementById("card");
+
+        card.addEventListener("click", () =>
+        {
+                card.classList.toggle("is-flipped");
+        });
+
+        function changeCard() {
+                card.classList.remove("change-card");
+                void card.offsetWidth;
+                card.classList.add("change-card");
+                setTimeout(() => {
+                        card.remove()
+                }, 495)
+        }
+
+
+</script>
+</html>
