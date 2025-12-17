@@ -1,28 +1,57 @@
+:root {
+        --primary-back-color: #242533;
+        --muted-back-color: hsl(from var(--primary-back-color) h s calc(l + 5));
+        
+        --primary-front-color: #e9e9eb;
+        --secondary-front-color: hsl(from var(--primary-front-color) h s calc(l - 30));
+
+        --main-red: #BF0426;
+        --main-green: #00783F;
+        font-family: "Oswald", sans-serif;
+}
+
+*, *::before, *::after {
+        box-sizing: inherit;
+}
+
+html {
+        box-sizing: border-box;
+}
+
 body {
         margin: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        display: grid;
+        grid-template-columns: 20% 80%;
         width: 100vw;
         height: 100vh;
         overflow: hidden;
+        background-color: var(--primary-back-color);
+        transition: grid-template-columns 0.3s;
 }
 
 /* Card */
 
+.card-screen {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+}
+
 .card-ui-wrapper {
         width: 50%;
         height: 80%;
-        background-color: aqua;
         display: grid;
         grid-template-rows: 5fr 1fr;
         position: relative;
 }
 .card-ui-wrapper.isHidden::after {
         content: "No FlashCard Selected :(";
-        font-size: 3rem;
-        font-weight: 500;
-        color: black;
+        text-align: center;
+        padding: 6vw;
+        font-size: 4rem;
+        font-weight: 900;
+        color: var(--muted-back-color);
         visibility: visible;
         position: absolute;
         inset: 0;
@@ -32,7 +61,6 @@ body {
 }
 
 .card-container {
-        background-color: blue;
         perspective: 1000px;
 }
 .card {
@@ -43,41 +71,58 @@ body {
         transition: transform 0.6s ease;
         cursor: pointer;
         inset: 40px;
+        box-shadow: 0px 0px 50px 5px #00000077;
+        border-radius: 40px;
+        color: #0e0e0e;
 }
 
 .card-front {
-        background: #ffffff;
-        border: 2px solid #ccc;
+        background: linear-gradient(182deg,rgba(233, 233, 235, 1) 0%, rgba(194, 194, 194, 1) 100%);
+        
 }
 .card-back {
-        background: #f4f4f4;
-        border: 2px solid #ccc;
+        background: linear-gradient(-182deg,rgba(233, 233, 235, 1) 0%, rgba(194, 194, 194, 1) 100%);
         transform: rotateX(180deg);
 }
 
 .card-face {
+        transition: scale 0.4s, filter 0.4s;
+        border-radius: 40px;
+        border: solid 3px white;
         user-select: none;
         position: absolute;
         width: 100%;
         height: 100%;
         backface-visibility: hidden;
-
+        
         display: flex;
         align-items: center;
         justify-content: center;
+        
+        font-size: 2.5rem;
+        text-align: center;
+        padding: 40px;
+}
 
-        font-size: 24px;
-        border-radius: 12px;
+.card-container:hover .card .card-face {
+        filter: brightness(1.1);
+        scale: 1.0125;
 }
 
 .card.flip {
         transform: rotateX(180deg);
 }
 
+.card-ui-wrapper.isHidden *,
+.sidebar.isHidden *,
+.dim.disappear * {
+        transition: none !important;
+        animation: none !important;
+}
+
 /* Card Ctrl panel */
 
 .card-ctrl-container {
-        background-color: blueviolet;
         display: flex;
         justify-content: space-evenly;
         align-items: end;
@@ -86,36 +131,72 @@ body {
 .card-ctrl-btn {
         width: 150px;
         height: 80%;
+        border-radius: 25px;
+        box-shadow: 0px 0px 50px 5px #00000077;
+        border: solid white 3px;
+        background: linear-gradient(182deg,rgba(233, 233, 235, 1) 0%, rgba(194, 194, 194, 1) 100%);
+        transition: 0.3s;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 }
 
-.card-ctrl-btn#unknown-btn {
-        background-color: red;
+.card-ctrl-btn#unknown-btn:hover {
+        box-shadow: 0px 0px 40px 4px #BF042677;
+        scale: 1.05;
+        color: var(--main-red);
+        filter: brightness(1.1);
+
 }
-.card-ctrl-btn#known-btn {
-        background-color: green;
+.card-ctrl-btn#known-btn:hover {
+        box-shadow: 0px 0px 40px 4px #00783F77;
+        scale: 1.05;
+        color: var(--main-green);
+        filter: brightness(1.1);
+
+}
+.card-ctrl-btn#unknown-btn > svg {
+        color: var(--main-red);
+        scale: 0.7;
+        transition: 0.3s;
+}
+.card-ctrl-btn#known-btn > svg {
+        color: var(--main-green);
+        scale: 0.6;
+        transition: 0.3s;
+}
+.card-ctrl-btn#unknown-btn:hover > svg {
+        scale: 0.725;
+}
+.card-ctrl-btn#known-btn:hover > svg {
+        scale: 0.625;
 }
 
 .progress-bar-container {
-        width: 100%;
-        height: 10px;
+        width: 110%;
+        height: 20px;
         position: absolute;
-        inset: 0;
+        bottom: -60px;
+        left: -5%;
+        background-color: var(--secondary-front-color);
+        border-radius: 10px;
+        box-shadow: 0px 0px 50px 5px rgba(0, 0, 0, 0.77);
 }
 
 .progress-bar {
+        filter: brightness(1.1);
         height: 100%;
         width: 0%;
-        background-color: chocolate;
+        background-color: var(--primary-front-color);
         transition: width 0.3s ease-in-out;
-        border-radius: 5px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 15px 1px #ffffff1f;
+
 }
 
 /* Change card Anim */
 
 .transition-card {
-        background: #ffffff;
-        border: 2px solid #ccc;
-        border-radius: 12px;
         width: 100%;
         height: 100%;
         display: flex;
@@ -126,23 +207,27 @@ body {
         z-index: 2;
         font-size: 3rem;
         font-weight: 600;
+        border-radius: 40px;
+        border: solid 3px white;
+        box-shadow: 0px 0px 30px 1px #00000015;
+        background: linear-gradient(182deg,rgba(233, 233, 235, 1) 0%, rgba(194, 194, 194, 1) 100%);
 }
 
 .transition-card.card-known {
-        color: green;
+        color: var(--main-green);
         --card-slide: 20%, 0%;
         --card-tilt: -7deg;
 }
 
 .transition-card.card-unknown {
-        color: red;
+        color: var(--main-red);
         --card-slide: -20%, 0%;
         --card-tilt: 7deg;
 }
 
 @keyframes changeCardTilt {
         0% {
-                transform: scale(0.95);
+                transform: scale(1);
         }
         40% {
                 
@@ -187,16 +272,16 @@ body {
 }
 
 .transition-card.new-card-set {
+        color: #0e0e0e;
         --card-tilt: 0deg;
         animation: changeCardTilt 0.5s ease-in-out forwards;
         /* --card-tilt: 7deg; */
-        color: black;
 }
 .transition-card-wrapper:has(>.new-card-set) {
+        color: #0e0e0e;
         --card-slide: 0%, -60%;
         animation: changeCardSlide 0.5s ease-in-out forwards;
         /* --card-tilt: 7deg; */
-        color: black;
 }
 
 /* Dim Menu pop */
@@ -302,54 +387,182 @@ body {
 /* Side bar */
 
 .sidebar {
-        position: absolute;
-        inset: 0;
-        width: 20%;
-        height: 100vh;
-        background-color: crimson;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        row-gap: 10px;
+        /* transition: padding 0.3s; */
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background-color: var(--primary-back-color);
+        display: grid;
+        grid-template-columns: 1fr 60px;
+        overflow: hidden;
 }
-.other-btn {
-        background-color: darkkhaki;
+.card-manager {
+        color: var(--primary-front-color);
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-rows: 60px 60px 1fr;
+        gap: 10px;
+        padding: 0px 10px 10px 10px;
+        overflow-y: auto;
+        overflow-x: hidden;
+}
+#import-card-btn {
         width: 100%;
         height: 60px;
+}
+.import-card-btn-label {
         font-size: 1.5rem;
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: 60px 1fr;
+        grid-template-rows: 60px;
+        user-select: none;
+        transition: filter 0.2s;
+        border-radius: 15px;
+        border: solid 2px var(--primary-back-color);
+        background-color: var(--primary-back-color);
+}
+.import-btn-svg-wrapper {
+        height: 60px;
+        padding: 10px;
+}
+.import-btn-svg-wrapper > svg {
+        position: relative;
+        bottom: 5px;
+}
+.import-btn-title {
+        display: flex;
+        align-items: center;
+}
+.import-btn-title > div {
+        position: relative;
+        bottom: 6.5px;
+}
+
+.import-card-btn-label:hover {
+        filter: brightness(1.2);
+        border: solid 2px var(--muted-back-color);
+}
+
+.card-list-container {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-auto-rows: 60px;
+        row-gap: 10px;
+        overflow-y: auto;
+        overflow-x: hidden;     
+}
+
+*::-webkit-scrollbar {
+        width: 10px;
+        background: transparent;
+}
+
+*::-webkit-scrollbar-track {
+        background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+        background-color: var(--secondary-front-color);
+        border-radius: 10px;
+        border: 3px solid transparent;
+        background-clip: content-box;
+}
+
+.card-template-item {
+        background-color: var(--primary-back-color);
         display: flex;
         justify-content: center;
         align-items: center;
-        user-select: none;
-}
-.card-manager {
-        background-color: cornflowerblue;
-        width: 100%;
-        height: calc(100% - 2 * 60px - 30px - 3px);
-        display: flex;
-        flex-direction: column;
-        row-gap: 10px;
-
-}
-.card-list-container {
-        width: calc(100% - 40px);
-        height: calc(100% - 1 * 60px - 10px);
-        padding: 0 20px;
-        overflow-y: auto;
-        display: flex;
-        flex-direction: column;
-        row-gap: 7.5px;
-}
-.card-template-item {
-        flex-shrink: 0;
         width: 100%;
         height: 60px;
-        background-color: darkslateblue;
+        font-size: 1.3rem;
+        transition: filter 0.2s;
+        border-radius: 15px;
+        border: solid 2px var(--primary-back-color);
+}
+.card-template-item:hover {
+        filter: brightness(1.2);
+        border: solid 2px var(--muted-back-color);
 }
 
-.separator {
-        width: 90%;
-        background-color: darkorange;
-        height: 3px;
-        border-radius: 1.5px;
+/* sidebar btn */
+
+.sidebar-btn {
+        flex-shrink: 0;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 60px;
+        height: 100%;
+        background-color: var(--primary-back-color);
+        color: var(--primary-front-color);
+        display: flex;
+        z-index: 1;
+}
+.sidebar-btn-label {
+        position: absolute;
+        height: 60px;
+        aspect-ratio: 1 / 1;
+}
+
+.sidebar-btn-label > svg {
+        width: 60px;
+        height: 60px;
+        transition: filter 0.3s, scale 0.3s;
+        scale: 0.9;
+}
+.sidebar-btn-label:hover > svg {
+        filter: drop-shadow(0px 0px 6px #ffffff83);
+        scale: 1.00625;
+}
+
+
+.sidebar:has(#sidebar-btn-input:checked) {
+        padding: 0px;
+
+}
+body:has(#sidebar-btn-input:checked) {
+        display: grid;
+        grid-template-columns: calc(0% + 60px) 100%;
+
+}
+
+.sidebar-title-container{
+        display: grid;
+        grid-template-rows: 1fr 20px;
+        user-select: none;
+}
+.sidebar-title {
+        color: var(--primary-front-color);
+        padding-left: 10px;
+        font-size: 1.7rem;
+        display: flex;
+        align-items: center;
+        font-weight: 600;
+}
+.software-version {
+        color: var(--primary-front-color);
+        padding-left: 10px;
+        display: flex;
+        align-items: center;
+        opacity: 0.5;
+}
+
+.card-list-container:empty::after {
+        content: "No Imports :(";
+        text-align: center;
+        padding: 100px;
+        font-size: 2rem;
+        font-weight: 900;
+        color: var(--muted-back-color);
+        position: absolute;
+        inset: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        pointer-events: none;
 }

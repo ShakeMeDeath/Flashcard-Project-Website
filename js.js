@@ -51,7 +51,7 @@ function restartCardSet() {
         changeCard(loaded_card.CARD_INDEX)
 
         changeProgressBar(loaded_card.CARD_INDEX, loaded_card.CARD_SET.length - 1);
-        doCardAnim(awnser_status.NEW_SET, loaded_card.CARD_NAME);
+        // doCardAnim(awnser_status.NEW_SET, loaded_card.CARD_NAME);
 }
 
 function closeEndMenu() {
