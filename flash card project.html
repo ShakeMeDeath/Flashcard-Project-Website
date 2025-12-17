@@ -7,11 +7,30 @@
         <link rel="stylesheet" href="Style_sheet.css">
 </head>
 <body>
-        <div class="card-ui-wrapper">
+        <div class="sidebar">
+                <div class="other-btn"> idk 1</div>
+                <div class="other-btn"> idk 2</div>
+                <div class="separator"></div>
+                <div class="card-manager">
+                        <div class="other-btn" id="import-card-btn">
+                                <input style="display: none;" type="file" id="open-folder-input" webkitdirectory directory multiple/>
+                                <label for="open-folder-input" class="other-btn">
+                                        Open Folder
+                                </label>
+                        </div>
+                        <div class="card-list-container">
+                                <!-- <div class="card-template-item"></div>
+                                <div class="card-template-item"></div>
+                                <div class="card-template-item"></div>
+                                <div class="card-template-item"></div> -->
+                        </div>
+                </div>
+        </div>
+        <div class="card-ui-wrapper isHidden" style="visibility: hidden;">
                 <div class="card-container">
                         <div class="card">
-                                <div class="card-face card-front"> front </div>
-                                <div class="card-face card-back"> back </div>
+                                <div class="card-face card-front"></div>
+                                <div class="card-face card-back"></div>
                         </div>
                 </div>
                 <div class="card-ctrl-container">

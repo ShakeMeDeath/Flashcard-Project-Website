@@ -1,36 +1,10 @@
 let loaded_card = {
         CARD_INDEX: 0,
-        CARD_PROGRESSION: [],
-        CARD_NAME: "Life question",
-        CARD_SET : [],
-        CARD_ELEMENT: null
+        CARD_PROGRESSION: null,
+        CARD_NAME: null,
+        CARD_SET : null,
+        CARD_ELEMENT: document.querySelector(".card")
 }
-
-let cardset1 = [{
-                front: "what is canada ?",
-                back: "contry"
-        },
-        {
-                front: "what is keyboard ?",
-                back: "computer tool"
-        },
-        {
-                front: "what is cat ?",
-                back: "animal"
-        },{
-                front: "what is computer ?",
-                back: "machine"
-        },
-        {
-                front: "what is mom ?",
-                back: "human"
-        },
-        {
-                front: "what is light bulb ?",
-                back: "glassy thing"
-        }]
-
-let card_ui_wrapper = document.querySelector(".card-ui-wrapper");
 
 const awnser_status = {
         UNKNOWN: 0,
@@ -38,13 +12,9 @@ const awnser_status = {
         NEW_SET: 2
 };
 
+let card_ui_wrapper = document.querySelector(".card-ui-wrapper");
+
 // 
-//
-
-loaded_card.CARD_ELEMENT = document.querySelector(".card");
-
-let card_container = document.querySelector(".card-container");
-
 //  progress bar
 
 let progress_bar = document.querySelector(".progress-bar");
@@ -72,7 +42,16 @@ function isMenuBlocking() {
 }
 
 function restartCardSet() {
-        changeFlashcardSet(loaded_card.CARD_SET);
+        toggleHide(loaded_card.CARD_ELEMENT, false)
+        toggleHide(card_ui_wrapper, false)
+
+        loaded_card.CARD_PROGRESSION = [];
+        loaded_card.CARD_INDEX = 0
+
+        changeCard(loaded_card.CARD_INDEX)
+
+        changeProgressBar(loaded_card.CARD_INDEX, loaded_card.CARD_SET.length - 1);
+        doCardAnim(awnser_status.NEW_SET, loaded_card.CARD_NAME);
 }
 
 function closeEndMenu() {
@@ -116,18 +95,21 @@ function saveProgress(awnserStatus) {
 function toggleHide(element, hideBool) {
         if (hideBool === true) {
                 element.style.visibility = "hidden";
+                element.classList.add("isHidden");
         } else {
                 element.style.visibility = "visible";
+                element.classList.remove("isHidden");
         }
 }
 
 function gotoNextCard(awnserStatus) {
         saveProgress(awnserStatus)
 
+        
         if (loaded_card.CARD_INDEX+1 >= loaded_card.CARD_SET.length) {
                 triggerEndMenu()
         }
-
+        
         loaded_card.CARD_INDEX++
         changeCard(loaded_card.CARD_INDEX)
 
@@ -211,7 +193,7 @@ function doCardAnim(awnserStatus, card_name) {
 
         }
 
-        card_container.appendChild(cardAnim_clone);
+        document.querySelector(".card-container").appendChild(cardAnim_clone);
 
         setTimeout(() => {
                 document.querySelector(".transition-card-wrapper").remove();   // remove old card
@@ -245,8 +227,9 @@ function changeFlashcardSet(new_card_set) {
         toggleHide(loaded_card.CARD_ELEMENT, false)
         toggleHide(card_ui_wrapper, false)
 
+        loaded_card.CARD_NAME = new_card_set.title;
         loaded_card.CARD_PROGRESSION = [];
-        loaded_card.CARD_SET = new_card_set
+        loaded_card.CARD_SET = new_card_set.cards
         loaded_card.CARD_INDEX = 0
 
         changeCard(loaded_card.CARD_INDEX)
@@ -255,4 +238,54 @@ function changeFlashcardSet(new_card_set) {
         doCardAnim(awnser_status.NEW_SET, loaded_card.CARD_NAME);
 }
 
-changeFlashcardSet(cardset1);
+// 
+// card import
+
+let open_folder_input = document.getElementById("open-folder-input");
+
+let loaded_flashcards = {
+        CARD_FILES: null,
+        CARD_SET_LIST: [],
+        FILES_CONTAINER_ELEMENT: document.querySelector(".card-list-container")
+}
+
+function LoadCardSet(cardset_index) {
+        let current_card_set = loaded_flashcards.CARD_SET_LIST[cardset_index];
+
+        changeFlashcardSet(current_card_set);
+}
+
+function loadCardFiles() {
+        for (let i = 0; i < loaded_flashcards.CARD_SET_LIST.length; i++) {
+
+                let current_card_set = loaded_flashcards.CARD_SET_LIST[i];
+
+                let new_cardset_element = document.createElement("div");
+
+                new_cardset_element.textContent = current_card_set.title;
+                new_cardset_element.classList.add("card-template-item")
+                new_cardset_element.dataset.cardsetIndex = i;
+
+                loaded_flashcards.FILES_CONTAINER_ELEMENT.addEventListener("click", function (event) {
+                        let cardset_template_btn = event.target;
+
+                        LoadCardSet(cardset_template_btn.dataset.cardsetIndex);
+                });
+
+                loaded_flashcards.FILES_CONTAINER_ELEMENT.appendChild(new_cardset_element);
+        }
+}
+
+open_folder_input.addEventListener("change", async (e) => {
+        loaded_flashcards.CARD_FILES = e.target.files;
+        loaded_flashcards.CARD_SET_LIST = [];
+
+        // push each falshcards
+        for (const file of loaded_flashcards.CARD_FILES) {
+                if (file.name.endsWith(".json")) {
+                        const text = await file.text();
+                        loaded_flashcards.CARD_SET_LIST.push(JSON.parse(text));
+                }
+        }
+        loadCardFiles()
+});

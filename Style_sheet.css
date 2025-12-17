@@ -16,7 +16,21 @@ body {
         background-color: aqua;
         display: grid;
         grid-template-rows: 5fr 1fr;
+        position: relative;
 }
+.card-ui-wrapper.isHidden::after {
+        content: "No FlashCard Selected :(";
+        font-size: 3rem;
+        font-weight: 500;
+        color: black;
+        visibility: visible;
+        position: absolute;
+        inset: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+}
+
 .card-container {
         background-color: blue;
         perspective: 1000px;
@@ -116,13 +130,13 @@ body {
 
 .transition-card.card-known {
         color: green;
-        --card-slide: 60%, 0%;
+        --card-slide: 20%, 0%;
         --card-tilt: -7deg;
 }
 
 .transition-card.card-unknown {
         color: red;
-        --card-slide: -60%, 0%;
+        --card-slide: -20%, 0%;
         --card-tilt: 7deg;
 }
 
@@ -151,12 +165,12 @@ body {
 }
 
 .transition-card-wrapper:has(>.card-known) {
-        --card-slide: 60%, 0%;
+        --card-slide: 20%, 0%;
         --card-tilt: -7deg;
 }
 
 .transition-card-wrapper:has(>.card-unknown) {
-        --card-slide: -60%, 0%;
+        --card-slide: -20%, 0%;
         --card-tilt: 7deg;
 }
 
@@ -168,7 +182,7 @@ body {
         }
 
         100% {
-                transform: translate(var(--card-slide)); /* 60% */
+                transform: translate(var(--card-slide)); /* 20% */
         }
 }
 
@@ -200,7 +214,7 @@ body {
 }
 
 .dim.appear {
-        animation: Appear 1.2s ease-in-out;
+        animation: Appear 0.8s ease-in-out;
 }
 
 .menu-wrapper {
@@ -283,4 +297,59 @@ body {
 }
 .success-num {
         background-color: green;
+}
+
+/* Side bar */
+
+.sidebar {
+        position: absolute;
+        inset: 0;
+        width: 20%;
+        height: 100vh;
+        background-color: crimson;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        row-gap: 10px;
+}
+.other-btn {
+        background-color: darkkhaki;
+        width: 100%;
+        height: 60px;
+        font-size: 1.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        user-select: none;
+}
+.card-manager {
+        background-color: cornflowerblue;
+        width: 100%;
+        height: calc(100% - 2 * 60px - 30px - 3px);
+        display: flex;
+        flex-direction: column;
+        row-gap: 10px;
+
+}
+.card-list-container {
+        width: calc(100% - 40px);
+        height: calc(100% - 1 * 60px - 10px);
+        padding: 0 20px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        row-gap: 7.5px;
+}
+.card-template-item {
+        flex-shrink: 0;
+        width: 100%;
+        height: 60px;
+        background-color: darkslateblue;
+}
+
+.separator {
+        width: 90%;
+        background-color: darkorange;
+        height: 3px;
+        border-radius: 1.5px;
 }

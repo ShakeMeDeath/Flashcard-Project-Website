@@ -1,0 +1,19 @@
+{
+        "id": "5",
+        "title": "Computer Basics",
+        "description": "Introduction to computers",
+        "language": "en",
+        "createdAt": "2025-01-14T10:45:00Z",
+        "cards": [
+                {
+                        "id": "0",
+                        "front": "What is a computer?",
+                        "back": "An electronic device that processes data."
+                },
+                {
+                        "id": "1",
+                        "front": "What is RAM?",
+                        "back": "Temporary memory used by programs while running."
+                }
+        ]
+}

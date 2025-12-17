@@ -1,0 +1,29 @@
+{
+        "id": "2",
+        "title": "HTML Basics",
+        "description": "Core concepts of HTML",
+        "language": "en",
+        "createdAt": "2025-01-11T09:30:00Z",
+        "cards": [
+                {
+                        "id": "0",
+                        "front": "What does HTML stand for?",
+                        "back": "HyperText Markup Language."
+                },
+                {
+                        "id": "1",
+                        "front": "What is an HTML element?",
+                        "back": "An element is a combination of a tag and its content."
+                },
+                {
+                        "id": "2",
+                        "front": "What is the purpose of the <head> tag?",
+                        "back": "It contains metadata about the document."
+                },
+                {
+                        "id": "3",
+                        "front": "What tag is used for links?",
+                        "back": "The <a> tag."
+                }
+        ]
+}
