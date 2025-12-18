@@ -35,7 +35,7 @@
                 </div>
         </div>
         <div class="card-screen">
-                <div class="card-ui-wrapper isHidden" style="visibility: hidden;">
+                <div class="card-ui-wrapper" style="visibility: hidden;">
                         <div class="card-container">
                                 <div class="card">
                                         <div class="card-face card-front"></div>
@@ -43,8 +43,19 @@
                                 </div>
                         </div>
                         <div class="card-ctrl-container">
-                                <div class="progress-bar-container">
-                                        <div class="progress-bar"></div>
+                                <div class="card-menu progress-bar-container">
+                                        <div class="card-menu progress-bar"></div>
+
+                                        <div class="card-menu point"></div>
+                                        <div class="card-menu point"></div>
+                                        <div class="card-menu point"></div>
+                                        <div class="card-menu point"></div>
+                                        <div class="card-menu point"></div>
+                                        <div class="card-menu point"></div>
+                                        <div class="card-menu point"></div>
+                                        <div class="card-menu point"></div>
+                                        <div class="card-menu point"></div>
+                                        <div class="card-menu point"></div>
                                 </div>
                                 <div class="card-ctrl-btn" id="unknown-btn" type="button">
                                         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentcolor" stroke-width="0.36"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M6.99486 7.00636C6.60433 7.39689 6.60433 8.03005 6.99486 8.42058L10.58 12.0057L6.99486 15.5909C6.60433 15.9814 6.60433 16.6146 6.99486 17.0051C7.38538 17.3956 8.01855 17.3956 8.40907 17.0051L11.9942 13.4199L15.5794 17.0051C15.9699 17.3956 16.6031 17.3956 16.9936 17.0051C17.3841 16.6146 17.3841 15.9814 16.9936 15.5909L13.4084 12.0057L16.9936 8.42059C17.3841 8.03007 17.3841 7.3969 16.9936 7.00638C16.603 6.61585 15.9699 6.61585 15.5794 7.00638L11.9942 10.5915L8.40907 7.00636C8.01855 6.61584 7.38538 6.61584 6.99486 7.00636Z" fill="currentcolor"></path> </g></svg>
@@ -64,24 +75,61 @@
 </template>
 <template id="finnish-screen">
         <div class="dim appear">
-                <div class="menu-wrapper">
-                        <div class="menu">
-                                <p class="end-menu-text">You finnished !</p>
-                                <div class="progress-info">
+                <div class="menu">
+                        <div class="progress-info">
+                                <div style="display: flex; justify-content: center; flex-direction: column;">
+                                        <div style="display: flex; justify-content: center;">
+                                                <div class="end-menu-num"></div>
+                                                <div class="end-menu-unit">%</div>
+                                        </div>
+                                        <p class="end-menu-support">you are doing progress !</p>
+                                </div>
+                                <div class="end-menu progress-bar-container">
+                                        <div class="end-menu progress-bar"></div>
+
+                                        <div class="end-menu point"></div>
+                                        <div class="end-menu point"></div>
+                                        <div class="end-menu point"></div>
+                                        <div class="end-menu point"></div>
+                                        <div class="end-menu point"></div>
+                                        <div class="end-menu point"></div>
+                                        <div class="end-menu point"></div>
+                                        <div class="end-menu point"></div>
+                                        <div class="end-menu point"></div>
+                                        <div class="end-menu point"></div>
+                                </div>
+                                <!-- <div>
                                         <div class="card-end-info fails-num"></div>
                                         <div class="card-end-info success-num"></div>
+                                </div> -->
+                        </div>
+                        <div class="menu-ctrl-container">
+                                <div class="menu-ctrl-btn redo-btn">
+                                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" transform="matrix(-1, 0, 0, 1, 0, 0)rotate(90)"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g clip-path="url(#clip0_429_11071)"> <path d="M12 2.99982C16.9706 2.99982 21 7.02925 21 11.9998C21 16.9704 16.9706 20.9998 12 20.9998C7.02944 20.9998 3 16.9704 3 11.9998C3 9.17255 4.30367 6.64977 6.34267 4.99982" stroke="currentcolor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M3 4.49982H7V8.49982" stroke="currentcolor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path> </g> <defs> <clipPath id="clip0_429_11071"> <rect width="24" height="24" fill="white"></rect> </clipPath> </defs> </g></svg>
                                 </div>
-                                <div class="menu-ctrl-container">
-                                        <div class="menu-ctrl-btn redo-btn">Redo</div>
-                                        <div class="menu-ctrl-btn exit-btn">Exit</div>
+                                <div class="menu-ctrl-btn exit-btn">
+                                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentcolor" stroke-width="0.36"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M6.99486 7.00636C6.60433 7.39689 6.60433 8.03005 6.99486 8.42058L10.58 12.0057L6.99486 15.5909C6.60433 15.9814 6.60433 16.6146 6.99486 17.0051C7.38538 17.3956 8.01855 17.3956 8.40907 17.0051L11.9942 13.4199L15.5794 17.0051C15.9699 17.3956 16.6031 17.3956 16.9936 17.0051C17.3841 16.6146 17.3841 15.9814 16.9936 15.5909L13.4084 12.0057L16.9936 8.42059C17.3841 8.03007 17.3841 7.3969 16.9936 7.00638C16.603 6.61585 15.9699 6.61585 15.5794 7.00638L11.9942 10.5915L8.40907 7.00636C8.01855 6.61584 7.38538 6.61584 6.99486 7.00636Z" fill="currentcolor"></path> </g></svg>
                                 </div>
                         </div>
                 </div>
+                <!-- <div class="menu-wrapper">
+                </div> -->
         </div>
 </template>
 <template id="card-animation">
         <div class="transition-card-wrapper">
                 <div class="transition-card"></div>
+        </div>
+</template>
+<template id="cardset-template">
+        <div class="card-template-item">
+                <div class="cardset-template-item-title"></div>
+                <div class="cardset-template-item-svg-container">
+                        <div class="cardset-size-info"></div>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="176.6728 121.2309 251.9369 252.3937" width="251.937px" height="252.394px">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M 2.109 13.337 C 2.109 11.68 3.452 10.337 5.109 10.337 L 15.109 10.337 C 16.241 10.337 17.227 10.964 17.738 11.89 L 21.948 13.018 C 23.548 13.447 24.498 15.092 24.069 16.693 L 20.446 30.216 C 20.017 31.816 18.372 32.766 16.771 32.337 L 9.307 30.337 L 5.109 30.337 C 3.452 30.337 2.109 28.994 2.109 27.337 L 2.109 13.337 Z M 18.109 27.337 L 18.109 14.06 L 21.43 14.95 C 21.964 15.093 22.28 15.642 22.137 16.175 L 18.514 29.698 C 18.371 30.231 17.822 30.548 17.289 30.405 L 16.229 30.121 C 17.331 29.677 18.109 28.598 18.109 27.337 Z M 5.109 12.337 C 4.556 12.337 4.109 12.785 4.109 13.337 L 4.109 27.337 C 4.109 27.889 4.556 28.337 5.109 28.337 L 15.109 28.337 C 15.661 28.337 16.109 27.889 16.109 27.337 L 16.109 13.337 C 16.109 12.785 15.661 12.337 15.109 12.337 L 5.109 12.337 Z" fill="currentcolor" transform="matrix(11.418966293334961, 0, 0, 11.418966293334961, 152.5902099609375, 3.1930410861968994)"/>
+                        </svg>
+                </div>
         </div>
 </template>
 <script src="js.js"></script>

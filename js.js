@@ -14,6 +14,8 @@ const awnser_status = {
 
 let card_ui_wrapper = document.querySelector(".card-ui-wrapper");
 
+toggleHide(card_ui_wrapper, true)
+
 // 
 //  progress bar
 
@@ -42,14 +44,14 @@ function isMenuBlocking() {
 }
 
 function restartCardSet() {
-        toggleHide(loaded_card.CARD_ELEMENT, false)
-        toggleHide(card_ui_wrapper, false)
-
+        // toggleDisappear(loaded_card.CARD_ELEMENT, false)
+        // toggleDisappear(card_ui_wrapper, false)
+        
         loaded_card.CARD_PROGRESSION = [];
         loaded_card.CARD_INDEX = 0
-
+        
         changeCard(loaded_card.CARD_INDEX)
-
+        
         changeProgressBar(loaded_card.CARD_INDEX, loaded_card.CARD_SET.length - 1);
         // doCardAnim(awnser_status.NEW_SET, loaded_card.CARD_NAME);
 }
@@ -57,39 +59,13 @@ function restartCardSet() {
 function closeEndMenu() {
 
         let endMenu = document.querySelector(".dim");
+        // toggleDisappear(endMenu, true)
 
         endMenu.classList.add("disappear");
 
         endMenu.addEventListener("animationend", function() {
                 endMenu.remove();
         }, { once: true });
-}
-
-function triggerEndMenu() {
-        toggleHide(loaded_card.CARD_ELEMENT, true)
-
-        let clone = end_menu_template.content.cloneNode(true);
-
-        clone.querySelector(".fails-num").textContent = loaded_card.CARD_PROGRESSION.filter(x => x == 0).length;
-        clone.querySelector(".success-num").textContent = loaded_card.CARD_PROGRESSION.filter(x => x == 1).length;
-
-        // ctrl btns menu
-        clone.querySelector(".redo-btn").addEventListener("click", function() {
-                closeEndMenu()
-                restartCardSet()
-        })
-
-        clone.querySelector(".exit-btn").addEventListener("click", function() {
-                closeEndMenu()
-                toggleHide(card_ui_wrapper, true)
-                loaded_card.CARD_SET = null;
-        })
-
-        document.body.appendChild(clone);
-}
-
-function saveProgress(awnserStatus) {
-        loaded_card.CARD_PROGRESSION.push(awnserStatus);
 }
 
 function toggleHide(element, hideBool) {
@@ -100,6 +76,41 @@ function toggleHide(element, hideBool) {
                 element.style.visibility = "visible";
                 element.classList.remove("isHidden");
         }
+}
+
+function triggerEndMenu() {
+        let clone = end_menu_template.content.cloneNode(true);
+
+        const fails =loaded_card.CARD_PROGRESSION.filter(x => x == awnser_status.UNKNOWN).length
+        const success = loaded_card.CARD_PROGRESSION.filter(x => x == awnser_status.KNOWN).length
+
+        const pourcentage = Math.round(success * 100 / (success + fails));
+
+        // clone.querySelector(".fails-num").textContent = fails;
+        // clone.querySelector(".success-num").textContent = success;
+
+       clone.querySelector(".end-menu-num").textContent = pourcentage;
+       clone.querySelector(".end-menu .progress-bar").style.width = `${pourcentage}%`; // 
+       clone.querySelector(".end-menu .progress-bar").style.setProperty("--fill-pourcentage", `${pourcentage}%`);
+       
+       // ctrl btns menu
+       clone.querySelector(".redo-btn").addEventListener("click", function() {
+               closeEndMenu()
+               restartCardSet()
+        })
+        
+        clone.querySelector(".exit-btn").addEventListener("click", function() {
+                closeEndMenu()
+                // toggleDisappear(loaded_card.CARD_ELEMENT, true)
+                // toggleDisappear(card_ui_wrapper, true)
+                loaded_card.CARD_SET = null;
+        })
+        
+        document.querySelector(".card-screen").appendChild(clone);
+}
+
+function saveProgress(awnserStatus) {
+        loaded_card.CARD_PROGRESSION.push(awnserStatus);
 }
 
 function gotoNextCard(awnserStatus) {
@@ -186,7 +197,7 @@ function doCardAnim(awnserStatus, card_name) {
                 transition_card.classList.add("card-unknown");
                 cardAnim_clone.querySelector(".transition-card").textContent = "Still Learning";
         }
-        // should i separzate ?????
+
         else if (awnserStatus === awnser_status.NEW_SET) {
                 transition_card.classList.add("new-card-set");
                 cardAnim_clone.querySelector(".transition-card").textContent = `${card_name}`;
@@ -195,9 +206,9 @@ function doCardAnim(awnserStatus, card_name) {
 
         document.querySelector(".card-container").appendChild(cardAnim_clone);
 
-        setTimeout(() => {
-                document.querySelector(".transition-card-wrapper").remove();   // remove old card
-        }, 501);
+        document.querySelector(".transition-card-wrapper").addEventListener("animationend", function() {
+                        this.remove()
+        }, { once: true });
 }
 
 function changeCard(index) {
@@ -224,8 +235,7 @@ function changeCard(index) {
 // flashcard_set
 
 function changeFlashcardSet(new_card_set) {
-        toggleHide(loaded_card.CARD_ELEMENT, false)
-        toggleHide(card_ui_wrapper, false)
+        // toggleDisappear(card_ui_wrapper, false)
 
         loaded_card.CARD_NAME = new_card_set.title;
         loaded_card.CARD_PROGRESSION = [];
@@ -243,48 +253,53 @@ function changeFlashcardSet(new_card_set) {
 
 let open_folder_input = document.getElementById("open-folder-input");
 
-let loaded_flashcards = {
+let loaded_flashcards_files = {
         CARD_FILES: null,
         CARD_SET_LIST: [],
         FILES_CONTAINER_ELEMENT: document.querySelector(".card-list-container")
 }
 
 function LoadCardSet(cardset_index) {
-        let current_card_set = loaded_flashcards.CARD_SET_LIST[cardset_index];
+        let current_card_set = loaded_flashcards_files.CARD_SET_LIST[cardset_index];
+
+        toggleHide(card_ui_wrapper, false)
 
         changeFlashcardSet(current_card_set);
 }
 
 function loadCardFiles() {
-        for (let i = 0; i < loaded_flashcards.CARD_SET_LIST.length; i++) {
+        for (let i = 0; i < loaded_flashcards_files.CARD_SET_LIST.length; i++) {
 
-                let current_card_set = loaded_flashcards.CARD_SET_LIST[i];
+                let current_card_set = loaded_flashcards_files.CARD_SET_LIST[i];
 
-                let new_cardset_element = document.createElement("div");
+                let new_cardset_element = document.getElementById("cardset-template").content.cloneNode(true);
 
-                new_cardset_element.textContent = current_card_set.title;
-                new_cardset_element.classList.add("card-template-item")
-                new_cardset_element.dataset.cardsetIndex = i;
+                new_cardset_element.querySelector(".cardset-template-item-title").textContent = current_card_set.title;
+                new_cardset_element.querySelector(".card-template-item").dataset.cardsetIndex = i;
+                new_cardset_element.querySelector(".cardset-size-info").textContent = loaded_flashcards_files.CARD_SET_LIST[i].cards.length;
 
-                loaded_flashcards.FILES_CONTAINER_ELEMENT.addEventListener("click", function (event) {
+                loaded_flashcards_files.FILES_CONTAINER_ELEMENT.addEventListener("click", function (event) {
                         let cardset_template_btn = event.target;
 
-                        LoadCardSet(cardset_template_btn.dataset.cardsetIndex);
+                        if (cardset_template_btn.classList.contains("card-template-item")) {
+                                LoadCardSet(cardset_template_btn.dataset.cardsetIndex);
+                        }
+
                 });
 
-                loaded_flashcards.FILES_CONTAINER_ELEMENT.appendChild(new_cardset_element);
+                loaded_flashcards_files.FILES_CONTAINER_ELEMENT.appendChild(new_cardset_element);
         }
 }
 
 open_folder_input.addEventListener("change", async (e) => {
-        loaded_flashcards.CARD_FILES = e.target.files;
-        loaded_flashcards.CARD_SET_LIST = [];
+        loaded_flashcards_files.CARD_FILES = e.target.files;
+        loaded_flashcards_files.CARD_SET_LIST = [];
 
         // push each falshcards
-        for (const file of loaded_flashcards.CARD_FILES) {
+        for (const file of loaded_flashcards_files.CARD_FILES) {
                 if (file.name.endsWith(".json")) {
                         const text = await file.text();
-                        loaded_flashcards.CARD_SET_LIST.push(JSON.parse(text));
+                        loaded_flashcards_files.CARD_SET_LIST.push(JSON.parse(text));
                 }
         }
         loadCardFiles()

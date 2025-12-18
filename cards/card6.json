@@ -24,6 +24,66 @@
                         "id": "3",
                         "front": "What is HTTP?",
                         "back": "A protocol for transferring web data."
+                },
+                {
+                        "id": "0",
+                        "front": "What is the Internet?",
+                        "back": "A global network of connected computers."
+                },
+                {
+                        "id": "1",
+                        "front": "What is a browser?",
+                        "back": "A program used to access websites."
+                },
+                {
+                        "id": "2",
+                        "front": "What does URL stand for?",
+                        "back": "Uniform Resource Locator."
+                },
+                {
+                        "id": "3",
+                        "front": "What is HTTP?",
+                        "back": "A protocol for transferring web data."
+                },
+                {
+                        "id": "0",
+                        "front": "What is the Internet?",
+                        "back": "A global network of connected computers."
+                },
+                {
+                        "id": "1",
+                        "front": "What is a browser?",
+                        "back": "A program used to access websites."
+                },
+                {
+                        "id": "2",
+                        "front": "What does URL stand for?",
+                        "back": "Uniform Resource Locator."
+                },
+                {
+                        "id": "3",
+                        "front": "What is HTTP?",
+                        "back": "A protocol for transferring web data."
+                },
+                {
+                        "id": "0",
+                        "front": "What is the Internet?",
+                        "back": "A global network of connected computers."
+                },
+                {
+                        "id": "1",
+                        "front": "What is a browser?",
+                        "back": "A program used to access websites."
+                },
+                {
+                        "id": "2",
+                        "front": "What does URL stand for?",
+                        "back": "Uniform Resource Locator."
+                },
+                {
+                        "id": "3",
+                        "front": "What is HTTP?",
+                        "back": "A protocol for transferring web data."
                 }
         ]
 }
