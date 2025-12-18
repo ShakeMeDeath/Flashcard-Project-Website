@@ -36,6 +36,7 @@ body {
         display: flex;
         justify-content: center;
         align-items: center;
+        transition: padding 0.3s;
 }
 
 .card-ui-wrapper {
@@ -333,11 +334,11 @@ body {
         inset: 0;
         width: 100%;
         height: 100%;
-        /* background-color: rgba(0, 0, 0, 0.5); */
         display: flex;
         justify-content: center;
         align-items: center;
         z-index: 3;
+        padding-right: 0px;
         background-color: var(--primary-back-color);
 }
 .menu-wrapper {
@@ -413,10 +414,11 @@ body {
 }
 .exit-btn > svg {
         scale: 0.6;
-        transition: scale 0.2s;
+        transition: scale 0.2s, color 0.2s;
 }
 .exit-btn:hover > svg {
         scale: 0.625;
+        color: var(--main-red);
 }
 
 *.appear {
@@ -453,22 +455,7 @@ body {
         border: solid 3px var(--muted-back-color);
         color: var(--primary-front-color);
         font-family: "Roboto", sans-serif;
-        grid-template-rows: 60% 40%;
-}
-.card-end-info {
-        width: 200px;
-        height: 60%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 3rem;
-        user-select: none;
-}
-.fails-num {
-        background-color: red;
-}
-.success-num {
-        background-color: green;
+        grid-template-rows: 60% 0px 40%;
 }
 
 /* Side bar */
@@ -612,11 +599,18 @@ body {
 
 .sidebar:has(#sidebar-btn-input:checked) {
         padding: 0px;
-
 }
+.sidebar:has(#sidebar-btn-input:checked) ~ .card-screen {
+        padding-right: 60px;
+}
+.sidebar:has(#sidebar-btn-input:checked) ~ .card-screen .dim {
+        padding-right: 60px;
+}
+
+
 body:has(#sidebar-btn-input:checked) {
         display: grid;
-        grid-template-columns: calc(0% + 60px) 100%;
+        grid-template-columns: calc(0% + 60px) calc(100% - 60px);
 
 }
 
@@ -689,4 +683,37 @@ body:has(#sidebar-btn-input:checked) {
         font-size: 1rem;
         /* font-weight: 200; */
         font-family: "Roboto", sans-serif;
+}
+
+.end-menu.info-num-container {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: end;
+}
+.end-menu.card-info-wrapper {
+        background-color: var(--primary-back-color);
+        width: 30%;
+        height: 70%;
+        padding-bottom: 30px;
+}
+
+.card-end-info.fails-num, .card-end-info.success-num {
+        font-size: 3.5rem;
+        color: var(--secondary-front-color);
+        user-select: none;
+        font-weight: 700;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0.5;
+}
+.card-end-info.text-unit {
+        font-size: 0.8rem;
+        color: var(--secondary-front-color);
+        opacity: 0.5;
+        user-select: none;
+        font-weight: 600;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 }

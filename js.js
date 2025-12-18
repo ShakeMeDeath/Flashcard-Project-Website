@@ -2,7 +2,7 @@ let loaded_card = {
         CARD_INDEX: 0,
         CARD_PROGRESSION: null,
         CARD_NAME: null,
-        CARD_SET : null,
+        CARD_SET: null,
         CARD_ELEMENT: document.querySelector(".card")
 }
 
@@ -16,6 +16,14 @@ let card_ui_wrapper = document.querySelector(".card-ui-wrapper");
 
 toggleHide(card_ui_wrapper, true)
 
+let open_folder_input = document.getElementById("open-folder-input");
+
+let loaded_flashcards_files = {
+        CARD_FILES: null,
+        CARD_SET_LIST: [],
+        FILES_CONTAINER_ELEMENT: document.querySelector(".card-list-container"),
+        CASH_FILES_INDEX: null
+}
 // 
 //  progress bar
 
@@ -44,13 +52,19 @@ function isMenuBlocking() {
 }
 
 function restartCardSet() {
-        // toggleDisappear(loaded_card.CARD_ELEMENT, false)
-        // toggleDisappear(card_ui_wrapper, false)
         
+        // let cashed_cardset = loaded_flashcards_files.CARD_FILES[loaded_flashcards_files.CASH_CARD_INDEX];
+        // console.log("am i called")
+
+        // if (!loaded_flashcards_files.CARD_FILES[loaded_flashcards_files.CASH_CARD_INDEX]) console.log("i dont exist")
+
+        // console.log(cashed_cardset.cards)
+        // console.log(cashed_cardset.title)
+
         loaded_card.CARD_PROGRESSION = [];
         loaded_card.CARD_INDEX = 0
         
-        changeCard(loaded_card.CARD_INDEX)
+        changeFlashcardSet(loaded_card.CARD_SET, loaded_card.CARD_NAME);
         
         changeProgressBar(loaded_card.CARD_INDEX, loaded_card.CARD_SET.length - 1);
         // doCardAnim(awnser_status.NEW_SET, loaded_card.CARD_NAME);
@@ -78,25 +92,25 @@ function toggleHide(element, hideBool) {
         }
 }
 
-function triggerEndMenu() {
+function triggerEndMenu() {        
         let clone = end_menu_template.content.cloneNode(true);
-
+        
         const fails =loaded_card.CARD_PROGRESSION.filter(x => x == awnser_status.UNKNOWN).length
         const success = loaded_card.CARD_PROGRESSION.filter(x => x == awnser_status.KNOWN).length
-
+        
         const pourcentage = Math.round(success * 100 / (success + fails));
-
-        // clone.querySelector(".fails-num").textContent = fails;
-        // clone.querySelector(".success-num").textContent = success;
-
-       clone.querySelector(".end-menu-num").textContent = pourcentage;
-       clone.querySelector(".end-menu .progress-bar").style.width = `${pourcentage}%`; // 
-       clone.querySelector(".end-menu .progress-bar").style.setProperty("--fill-pourcentage", `${pourcentage}%`);
-       
-       // ctrl btns menu
-       clone.querySelector(".redo-btn").addEventListener("click", function() {
-               closeEndMenu()
-               restartCardSet()
+        
+        clone.querySelector(".fails-num").textContent = fails;
+        clone.querySelector(".success-num").textContent = success;
+        
+        clone.querySelector(".end-menu-num").textContent = pourcentage;
+        clone.querySelector(".end-menu .progress-bar").style.width = `${pourcentage}%`; // 
+        clone.querySelector(".end-menu .progress-bar").style.setProperty("--fill-pourcentage", `${pourcentage}%`);
+        
+        // ctrl btns menu
+        clone.querySelector(".redo-btn").addEventListener("click", function() {
+                closeEndMenu();
+                restartCardSet();
         })
         
         clone.querySelector(".exit-btn").addEventListener("click", function() {
@@ -177,45 +191,33 @@ const end_menu_template = document.getElementById("finnish-screen");
 
 function doCardAnim(awnserStatus, card_name) {
 
-        // let transition_card_wrapper = document.createElement("div");
-        // transition_card_wrapper.classList.add("transition-card-wrapper")
-
-        // let transition_card = document.createElement("div");
-        // transition_card.classList.add("transition-card");
-
         const cardAnim_template = document.getElementById("card-animation");
         let cardAnim_clone = cardAnim_template.content.cloneNode(true);
 
         let transition_card = cardAnim_clone.querySelector(".transition-card");
+        let transition_wrapper = cardAnim_clone.querySelector(".transition-card-wrapper");
 
         if (awnserStatus === awnser_status.KNOWN) {
                 transition_card.classList.add("card-known");
-                cardAnim_clone.querySelector(".transition-card").textContent = "Know";
+                transition_card.textContent = "Know";
         }
-        
         else if (awnserStatus === awnser_status.UNKNOWN) {
                 transition_card.classList.add("card-unknown");
-                cardAnim_clone.querySelector(".transition-card").textContent = "Still Learning";
+                transition_card.textContent = "Still Learning";
         }
-
         else if (awnserStatus === awnser_status.NEW_SET) {
                 transition_card.classList.add("new-card-set");
-                cardAnim_clone.querySelector(".transition-card").textContent = `${card_name}`;
-
+                transition_card.textContent = `${card_name}`;
         }
 
-        document.querySelector(".card-container").appendChild(cardAnim_clone);
-
-        document.querySelector(".transition-card-wrapper").addEventListener("animationend", function() {
-                        this.remove()
+        transition_wrapper.addEventListener("animationend", function() {
+                this.remove();
         }, { once: true });
+
+        document.querySelector(".card-container").appendChild(cardAnim_clone);
 }
 
 function changeCard(index) {
-
-        // changeProgressBar(index, card_list.cards.length - 1);
-        // doCardAnim(awnserStatus, card_list.name);
-
 
         // flip without animation
         if (isCardFliped() === true) {
@@ -234,15 +236,15 @@ function changeCard(index) {
 
 // flashcard_set
 
-function changeFlashcardSet(new_card_set) {
-        // toggleDisappear(card_ui_wrapper, false)
-
-        loaded_card.CARD_NAME = new_card_set.title;
+function changeFlashcardSet(card_set_cards, card_set_title) {
+        // console.log(card_set);
+        
+        loaded_card.CARD_NAME = card_set_title;
         loaded_card.CARD_PROGRESSION = [];
-        loaded_card.CARD_SET = new_card_set.cards
+        loaded_card.CARD_SET = card_set_cards;
         loaded_card.CARD_INDEX = 0
 
-        changeCard(loaded_card.CARD_INDEX)
+        changeCard(loaded_card.CARD_INDEX);
 
         changeProgressBar(loaded_card.CARD_INDEX, loaded_card.CARD_SET.length - 1);
         doCardAnim(awnser_status.NEW_SET, loaded_card.CARD_NAME);
@@ -251,23 +253,27 @@ function changeFlashcardSet(new_card_set) {
 // 
 // card import
 
-let open_folder_input = document.getElementById("open-folder-input");
-
-let loaded_flashcards_files = {
-        CARD_FILES: null,
-        CARD_SET_LIST: [],
-        FILES_CONTAINER_ELEMENT: document.querySelector(".card-list-container")
-}
 
 function LoadCardSet(cardset_index) {
         let current_card_set = loaded_flashcards_files.CARD_SET_LIST[cardset_index];
 
         toggleHide(card_ui_wrapper, false)
 
-        changeFlashcardSet(current_card_set);
+        changeFlashcardSet(current_card_set.cards);
 }
 
 function loadCardFiles() {
+        loaded_flashcards_files.FILES_CONTAINER_ELEMENT.addEventListener("click", function (event) {
+
+                let cardset_template_btn = event.target;
+                if (cardset_template_btn.classList.contains("card-template-item")) {
+                        
+                        if (isMenuBlocking() == false) {
+                                LoadCardSet(cardset_template_btn.dataset.cardsetIndex);
+                        }
+                }
+        });
+
         for (let i = 0; i < loaded_flashcards_files.CARD_SET_LIST.length; i++) {
 
                 let current_card_set = loaded_flashcards_files.CARD_SET_LIST[i];
@@ -277,15 +283,6 @@ function loadCardFiles() {
                 new_cardset_element.querySelector(".cardset-template-item-title").textContent = current_card_set.title;
                 new_cardset_element.querySelector(".card-template-item").dataset.cardsetIndex = i;
                 new_cardset_element.querySelector(".cardset-size-info").textContent = loaded_flashcards_files.CARD_SET_LIST[i].cards.length;
-
-                loaded_flashcards_files.FILES_CONTAINER_ELEMENT.addEventListener("click", function (event) {
-                        let cardset_template_btn = event.target;
-
-                        if (cardset_template_btn.classList.contains("card-template-item")) {
-                                LoadCardSet(cardset_template_btn.dataset.cardsetIndex);
-                        }
-
-                });
 
                 loaded_flashcards_files.FILES_CONTAINER_ELEMENT.appendChild(new_cardset_element);
         }
