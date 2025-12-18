@@ -24,6 +24,25 @@ let loaded_flashcards_files = {
         FILES_CONTAINER_ELEMENT: document.querySelector(".card-list-container"),
         CASH_FILES_INDEX: null
 }
+
+function generateCardSet_WithIndex(cardset_progression) {
+        let fail_list = []
+
+        for (let i = 0; i < cardset_progression.length; i++) {
+                if (cardset_progression[i][1] === awnser_status.UNKNOWN) {
+                        fail_list.push(cardset_progression[i][0]);
+                }
+        }
+        
+        let new_card_set = []
+
+        for (let i = 0; i < fail_list.length; i++) {
+                new_card_set.push(loaded_card.CARD_SET[fail_list[i]])
+        }
+        
+        return new_card_set
+}
+
 // 
 //  progress bar
 
@@ -53,20 +72,7 @@ function isMenuBlocking() {
 
 function restartCardSet() {
         
-        // let cashed_cardset = loaded_flashcards_files.CARD_FILES[loaded_flashcards_files.CASH_CARD_INDEX];
-        // console.log("am i called")
-
-        // if (!loaded_flashcards_files.CARD_FILES[loaded_flashcards_files.CASH_CARD_INDEX]) console.log("i dont exist")
-
-        // console.log(cashed_cardset.cards)
-        // console.log(cashed_cardset.title)
-
-        loaded_card.CARD_PROGRESSION = [];
-        loaded_card.CARD_INDEX = 0
-        
         changeFlashcardSet(loaded_card.CARD_SET, loaded_card.CARD_NAME);
-        
-        changeProgressBar(loaded_card.CARD_INDEX, loaded_card.CARD_SET.length - 1);
         // doCardAnim(awnser_status.NEW_SET, loaded_card.CARD_NAME);
 }
 
@@ -92,51 +98,65 @@ function toggleHide(element, hideBool) {
         }
 }
 
+
 function triggerEndMenu() {        
         let clone = end_menu_template.content.cloneNode(true);
         
-        const fails =loaded_card.CARD_PROGRESSION.filter(x => x == awnser_status.UNKNOWN).length
-        const success = loaded_card.CARD_PROGRESSION.filter(x => x == awnser_status.KNOWN).length
+        const fails =loaded_card.CARD_PROGRESSION.map(item => item[1]).filter(x => x == awnser_status.UNKNOWN).length
+        const success = loaded_card.CARD_PROGRESSION.map(item => item[1]).filter(x => x == awnser_status.KNOWN).length
         
         const pourcentage = Math.round(success * 100 / (success + fails));
         
         clone.querySelector(".fails-num").textContent = fails;
         clone.querySelector(".success-num").textContent = success;
+
+        if (pourcentage == 100) { // hide Redo-Fails button, if all card is success
+                clone.querySelector(".redo-fails-btn").style.setProperty("display", "none");
+        }
         
         clone.querySelector(".end-menu-num").textContent = pourcentage;
         clone.querySelector(".end-menu .progress-bar").style.width = `${pourcentage}%`; // 
         clone.querySelector(".end-menu .progress-bar").style.setProperty("--fill-pourcentage", `${pourcentage}%`);
         
         // ctrl btns menu
+        clone.querySelector(".redo-fails-btn").addEventListener("click", function() {
+                closeEndMenu();
+                changeFlashcardSet(generateCardSet_WithIndex(loaded_card.CARD_PROGRESSION), loaded_card.CARD_NAME);
+        })
+        
         clone.querySelector(".redo-btn").addEventListener("click", function() {
                 closeEndMenu();
                 restartCardSet();
         })
         
         clone.querySelector(".exit-btn").addEventListener("click", function() {
+                toggleHide(card_ui_wrapper, true)
                 closeEndMenu()
-                // toggleDisappear(loaded_card.CARD_ELEMENT, true)
-                // toggleDisappear(card_ui_wrapper, true)
                 loaded_card.CARD_SET = null;
         })
         
         document.querySelector(".card-screen").appendChild(clone);
 }
 
-function saveProgress(awnserStatus) {
-        loaded_card.CARD_PROGRESSION.push(awnserStatus);
+function saveProgress(index, awnserStatus) {
+        loaded_card.CARD_PROGRESSION.push([index, awnserStatus]);
+}
+
+function checkIfLastCard() {
+        return loaded_card.CARD_INDEX >= loaded_card.CARD_SET.length
 }
 
 function gotoNextCard(awnserStatus) {
-        saveProgress(awnserStatus)
+        saveProgress(loaded_card.CARD_INDEX, awnserStatus)
 
+        loaded_card.CARD_INDEX++
         
-        if (loaded_card.CARD_INDEX+1 >= loaded_card.CARD_SET.length) {
+        if (checkIfLastCard() === true) {
                 triggerEndMenu()
+        } else {
+                changeCard(loaded_card.CARD_INDEX)
         }
         
-        loaded_card.CARD_INDEX++
-        changeCard(loaded_card.CARD_INDEX)
 
         changeProgressBar(loaded_card.CARD_INDEX, loaded_card.CARD_SET.length - 1);
         doCardAnim(awnserStatus, loaded_card.CARD_NAME);
@@ -259,7 +279,7 @@ function LoadCardSet(cardset_index) {
 
         toggleHide(card_ui_wrapper, false)
 
-        changeFlashcardSet(current_card_set.cards);
+        changeFlashcardSet(current_card_set.cards, current_card_set.title);
 }
 
 function loadCardFiles() {

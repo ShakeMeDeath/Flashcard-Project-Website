@@ -7,6 +7,7 @@
 
         --main-red: #BF0426;
         --main-green: #00783F;
+        --main-orange: #be6104;
         font-family: "Oswald", sans-serif;
 }
 
@@ -388,37 +389,67 @@ body {
         height: max(100%, 150px);
 }
 .menu-ctrl-btn {
+        box-sizing: border-box;
         width: 150px;
-        height: 40%;
+        height: 50%;
         border-radius: 25px;
         border: solid var(--muted-back-color) 3px;
-        transition: 0.3s;
         background-color: var(--primary-back-color);
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        display: grid;
+        grid-template-rows: 70% 30%;
+        padding-bottom: 10px;
+        position: relative;
+        /* padding: 10px; */
         color: var(--muted-back-color);
-        transition: scale 0.2s;
+        transition: scale 0.3s, color 0.3s;
 }
 .menu-ctrl-btn:hover {
         scale: 1.05;
 }
 
+.end-menu.svg-wrapper {
+        max-height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+}
+.end-menu.redo-svg-fails {
+        position: absolute;
+        right: 20px;
+        top: 15px;
+        width: 20%;
+}
 
-.redo-btn > svg {
-        scale: 0.4;
-        transition: scale 0.2s;
+.cross-svg, .redo-svg, .fail-symbol {
+        scale: 0.9;
+        height: 100%;
+        position: relative;
+        top: 10px;
 }
-.redo-btn:hover > svg {
-        scale: 0.425;
+
+.menu-ctrl-btn:hover.redo-fails-btn {
+        color: var(--main-orange);
 }
-.exit-btn > svg {
-        scale: 0.6;
-        transition: scale 0.2s, color 0.2s;
-}
-.exit-btn:hover > svg {
-        scale: 0.625;
+.menu-ctrl-btn:hover.exit-btn {
         color: var(--main-red);
+}
+
+.cross-svg {
+        scale: 1.5;
+}
+
+.end-menu.tooltip {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 600;
+        font-size: 0.8rem;
+        font-family: "Roboto", sans-serif;
+        color: var(--secondary-front-color);
+        opacity: 0.5;
+        user-select: none;
+        pointer-events: none;
 }
 
 *.appear {
