@@ -351,10 +351,10 @@ body {
         width: 50%;
         height: 80%;
         display: grid;
-        grid-template-rows: 3fr 2fr 1fr;
+        grid-template-rows: 3fr 2fr;
 }
 .end-menu-num {
-        font-size: 4rem;
+        font-size: 6rem;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -362,7 +362,7 @@ body {
         font-weight: 700;
 }
 .end-menu-unit {
-        font-size: 2rem;
+        font-size: 3rem;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -372,7 +372,7 @@ body {
 
 .end-menu-support {
         margin: 0;
-        font-size: 0.9rem;
+        font-size: 1rem;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -729,7 +729,7 @@ body:has(#sidebar-btn-input:checked) {
 }
 
 .card-end-info.fails-num, .card-end-info.success-num {
-        font-size: 3.5rem;
+        font-size: 4rem;
         color: var(--secondary-front-color);
         user-select: none;
         font-weight: 700;
