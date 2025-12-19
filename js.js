@@ -12,6 +12,20 @@ const awnser_status = {
         NEW_SET: 2
 };
 
+const supportMessages = [
+        "Everyone starts somewhere.",
+        "A first step forward.",
+        "Some progress is happening.",
+        "You’re getting familiar.",
+        "Making steady progress.",
+        "Halfway there.",
+        "Good progress.",
+        "Nice work.",
+        "Great job.",
+        "Almost perfect.",
+        "Perfect !"
+];
+
 let card_ui_wrapper = document.querySelector(".card-ui-wrapper");
 
 toggleHide(card_ui_wrapper, true)
@@ -98,6 +112,12 @@ function toggleHide(element, hideBool) {
         }
 }
 
+function getSupportSentence(pourcentage) {
+        let rounded_score = Math.floor(pourcentage / 10); // rounded to nearest mutiple of 10, then takes the unit number
+
+        return supportMessages[rounded_score]
+}
+
 
 function triggerEndMenu() {        
         let clone = end_menu_template.content.cloneNode(true);
@@ -110,6 +130,8 @@ function triggerEndMenu() {
         clone.querySelector(".fails-num").textContent = fails;
         clone.querySelector(".success-num").textContent = success;
         clone.querySelector(".card-num").textContent = loaded_card.CARD_SET.length;
+        clone.querySelector(".end-menu-support").textContent = getSupportSentence(pourcentage);
+
 
         if (pourcentage == 100) { // hide Redo-Fails button, if all card is success
                 clone.querySelector(".redo-fails-btn").style.setProperty("display", "none");
