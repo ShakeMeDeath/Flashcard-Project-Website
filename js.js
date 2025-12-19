@@ -3,7 +3,8 @@ let loaded_card = {
         CARD_PROGRESSION: null,
         CARD_NAME: null,
         CARD_SET: null,
-        CARD_ELEMENT: document.querySelector(".card")
+        CARD_ELEMENT: document.querySelector(".card"),
+        CASH_CARD_INDEX: null
 }
 
 const awnser_status = {
@@ -36,7 +37,6 @@ let loaded_flashcards_files = {
         CARD_FILES: null,
         CARD_SET_LIST: [],
         FILES_CONTAINER_ELEMENT: document.querySelector(".card-list-container"),
-        CASH_FILES_INDEX: null
 }
 
 function generateCardSet_WithIndex(cardset_progression) {
@@ -84,12 +84,6 @@ function isMenuBlocking() {
         return document.querySelector(".dim") != null;
 }
 
-function restartCardSet() {
-        
-        changeFlashcardSet(loaded_card.CARD_SET, loaded_card.CARD_NAME);
-        // doCardAnim(awnser_status.NEW_SET, loaded_card.CARD_NAME);
-}
-
 function closeEndMenu() {
 
         let endMenu = document.querySelector(".dim");
@@ -119,7 +113,8 @@ function getSupportSentence(pourcentage) {
 }
 
 
-function triggerEndMenu() {        
+function triggerEndMenu() {
+        
         let clone = end_menu_template.content.cloneNode(true);
         
         const fails =loaded_card.CARD_PROGRESSION.map(item => item[1]).filter(x => x == awnser_status.UNKNOWN).length
@@ -131,8 +126,8 @@ function triggerEndMenu() {
         clone.querySelector(".success-num").textContent = success;
         clone.querySelector(".card-num").textContent = loaded_card.CARD_SET.length;
         clone.querySelector(".end-menu-support").textContent = getSupportSentence(pourcentage);
-
-
+        
+        
         if (pourcentage == 100) { // hide Redo-Fails button, if all card is success
                 clone.querySelector(".redo-fails-btn").style.setProperty("display", "none");
         }
@@ -149,7 +144,7 @@ function triggerEndMenu() {
         
         clone.querySelector(".redo-btn").addEventListener("click", function() {
                 closeEndMenu();
-                restartCardSet();
+                changeFlashcardSet(loaded_flashcards_files.CARD_SET_LIST[loaded_card.CASH_CARD_INDEX].cards, loaded_card.CARD_NAME);
         })
         
         clone.querySelector(".exit-btn").addEventListener("click", function() {
@@ -286,7 +281,7 @@ function changeFlashcardSet(card_set_cards, card_set_title) {
         loaded_card.CARD_PROGRESSION = [];
         loaded_card.CARD_SET = card_set_cards;
         loaded_card.CARD_INDEX = 0
-
+        
         changeCard(loaded_card.CARD_INDEX);
 
         changeProgressBar(loaded_card.CARD_INDEX, loaded_card.CARD_SET.length - 1);
@@ -312,6 +307,7 @@ function loadCardFiles() {
                 if (cardset_template_btn.classList.contains("card-template-item")) {
                         
                         if (isMenuBlocking() == false) {
+                                loaded_card.CASH_CARD_INDEX = cardset_template_btn.dataset.cardsetIndex
                                 LoadCardSet(cardset_template_btn.dataset.cardsetIndex);
                         }
                 }
