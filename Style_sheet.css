@@ -486,7 +486,7 @@ body {
         border: solid 3px var(--muted-back-color);
         color: var(--primary-front-color);
         font-family: "Roboto", sans-serif;
-        grid-template-rows: 60% 0px 40%;
+        grid-template-rows: 60% 15px calc(40% - 15px);
 }
 
 /* Side bar */
@@ -719,13 +719,16 @@ body:has(#sidebar-btn-input:checked) {
 .end-menu.info-num-container {
         display: flex;
         justify-content: space-evenly;
-        align-items: end;
+        align-items: center;
 }
 .end-menu.card-info-wrapper {
         background-color: var(--primary-back-color);
         width: 30%;
         height: 70%;
-        padding-bottom: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
 }
 
 .card-end-info.fails-num, .card-end-info.success-num {
@@ -733,18 +736,52 @@ body:has(#sidebar-btn-input:checked) {
         color: var(--secondary-front-color);
         user-select: none;
         font-weight: 700;
+        opacity: 0.5;
         display: flex;
         justify-content: center;
         align-items: center;
-        opacity: 0.5;
 }
 .card-end-info.text-unit {
         font-size: 0.8rem;
         color: var(--secondary-front-color);
         opacity: 0.5;
+        height: 24px;
         user-select: none;
         font-weight: 600;
         display: flex;
         justify-content: center;
         align-items: center;
+}
+.card-end-info.svg-unit > svg {
+        width: 18px;
+        height: 18px;
+        display: flex;
+        justify-content: center;
+}
+.card-end-info.svg-unit {
+        height: 24px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: var(--secondary-front-color);
+        opacity: 0.5;
+}
+.card-end-info.card-num {
+        font-size: 4rem;
+        color: var(--secondary-front-color);
+        opacity: 0.5;
+        user-select: none;
+        font-weight: 700;
+        display: flex;
+        justify-content: center;
+}
+
+.card-end-info.divisor {
+        box-sizing: content-box;
+        border-radius: 2px;
+        width: 4px;
+        margin: 0px auto;
+        height: 50%;
+        background-color: var(--muted-back-color);
 }

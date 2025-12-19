@@ -109,6 +109,7 @@ function triggerEndMenu() {
         
         clone.querySelector(".fails-num").textContent = fails;
         clone.querySelector(".success-num").textContent = success;
+        clone.querySelector(".card-num").textContent = loaded_card.CARD_SET.length;
 
         if (pourcentage == 100) { // hide Redo-Fails button, if all card is success
                 clone.querySelector(".redo-fails-btn").style.setProperty("display", "none");
