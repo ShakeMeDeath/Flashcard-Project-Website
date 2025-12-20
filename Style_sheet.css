@@ -22,12 +22,18 @@ html {
 body {
         margin: 0;
         display: grid;
-        grid-template-columns: 20% 80%;
+        grid-template-columns: 25% 75%;
         width: 100vw;
         height: 100vh;
         overflow: hidden;
         background-color: var(--primary-back-color);
         transition: grid-template-columns 0.3s;
+}
+
+@media (max-width: 1400px) {
+        body {
+                grid-template-columns: 35% 65%;
+        }
 }
 
 /* Card */
@@ -401,10 +407,11 @@ body {
         position: relative;
         /* padding: 10px; */
         color: var(--muted-back-color);
-        transition: scale 0.3s, color 0.3s;
+        transition: scale 0.2s, color 0.2s, filter 0.2s;
 }
 .menu-ctrl-btn:hover {
         scale: 1.05;
+        filter: brightness(1.1);
 }
 
 .end-menu.svg-wrapper {
@@ -427,6 +434,7 @@ body {
         position: relative;
         top: 10px;
 }
+
 
 .menu-ctrl-btn:hover.redo-fails-btn {
         color: var(--main-orange);
@@ -506,36 +514,50 @@ body {
         width: 100%;
         height: 100%;
         display: grid;
-        grid-template-rows: 60px 60px 1fr;
+        grid-template-rows: 60px 2px auto 2px 1fr;
         gap: 10px;
         padding: 0px 10px 10px 10px;
         overflow-y: auto;
         overflow-x: hidden;
 }
-#import-card-btn {
+.sidebar-divisor {
         width: 100%;
-        height: 60px;
+        background-color: var(--muted-back-color);
+        border-radius: 1px;
+}
+
+#import-card-btn {
+        height: 40px;
+        width: 100%;
 }
 .import-card-btn-label {
-        font-size: 1.5rem;
+        font-size: 1rem;
         width: 100%;
         height: 100%;
         display: grid;
-        grid-template-columns: 60px 1fr;
-        grid-template-rows: 60px;
+        grid-template-columns: 40px auto 1fr auto;
+        grid-template-rows: 40px;
         user-select: none;
         transition: filter 0.2s;
         border-radius: 15px;
+        font-weight: 600;
         border: solid 2px var(--primary-back-color);
         background-color: var(--primary-back-color);
 }
+.sidebar-btns-container {
+        display: flex;
+        flex-direction: column;
+}
 .import-btn-svg-wrapper {
-        height: 60px;
-        padding: 10px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 }
 .import-btn-svg-wrapper > svg {
+        scale: 0.7;
         position: relative;
-        bottom: 5px;
+        bottom: 4px;
 }
 .import-btn-title {
         font-family: "Roboto", sans-serif;
@@ -547,6 +569,16 @@ body {
 .import-btn-title > div {
         position: relative;
         bottom: 6.5px;
+}
+.sidebar-keybind-tooltip {
+        color: var(--secondary-front-color);
+        opacity: 0.5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-right: 10px;
+        font-weight: 400;
+        font-family: "Roboto", sans-serif;
 }
 
 .import-card-btn-label:hover {
@@ -621,11 +653,15 @@ body {
 .sidebar-btn-label > svg {
         width: 60px;
         height: 60px;
-        transition: filter 0.3s;
+        transition: color 0.3s;
         scale: 0.9;
+        opacity: 0.5;
+        color: var(--secondary-front-color);
 }
 .sidebar-btn-label:hover > svg {
-        filter: drop-shadow(0px 0px 6px #ffffff83);
+        color: var(--primary-front-color);
+        opacity: 1;
+        /* filter: drop-shadow(0px 0px 6px #ffffff83); */
 }
 
 
@@ -782,17 +818,4 @@ body:has(#sidebar-btn-input:checked) {
         margin: 0px auto;
         height: 50%;
         background-color: var(--muted-back-color);
-}
-
-.cardset-template-divisor {
-        height: 2px;
-        display: flex;
-        justify-content: center;
-}
-.cardset-template-divisor-color {
-        border-radius: 1px;
-        background-color: var(--muted-back-color);
-        width: 80%;
-        height: 100%;
-
 }
