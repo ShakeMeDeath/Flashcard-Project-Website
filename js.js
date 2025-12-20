@@ -33,10 +33,44 @@ toggleHide(card_ui_wrapper, true)
 
 let open_folder_input = document.getElementById("open-folder-input");
 
+let shuffle_btn = document.getElementById("shuffle-card-btn");
+
 let loaded_flashcards_files = {
         CARD_FILES: null,
         CARD_SET_LIST: [],
         FILES_CONTAINER_ELEMENT: document.querySelector(".card-list-container"),
+}
+
+function getRandomInt(max) {
+        return Math.floor(Math.random() * max);
+}
+
+function createShuffleMap(card_set) {
+        // generate random map list
+        const arr = [];
+
+        for (let i = 0; i < card_set.length; i++) {
+                arr.push(i);
+        }
+
+        // Fisher–Yates shuffle
+        for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+
+        return arr;
+}
+
+function shuffleCards(card_set) {
+        let random_shuffle = createShuffleMap(card_set);
+        let new_card_set = structuredClone(card_set);
+
+        for (let i = 0; i < card_set.length; i++) {
+                new_card_set[i] = card_set[random_shuffle[i]]
+        }
+
+        return new_card_set
 }
 
 function generateCardSet_WithIndex(cardset_progression) {
@@ -327,6 +361,13 @@ function loadCardFiles() {
         }
 }
 
+document.addEventListener("keydown", event => {
+        if (event.ctrlKey && event.shiftKey && event.key === "O") {
+                event.preventDefault();
+                open_folder_input.click();
+        }
+});
+
 open_folder_input.addEventListener("change", async (e) => {
         loaded_flashcards_files.CARD_FILES = e.target.files;
         loaded_flashcards_files.CARD_SET_LIST = [];
@@ -339,4 +380,23 @@ open_folder_input.addEventListener("change", async (e) => {
                 }
         }
         loadCardFiles()
+});
+
+shuffle_btn.addEventListener("click", function () {
+        if (loaded_flashcards_files.CARD_FILES !== null) {
+                if (loaded_card.CARD_SET !== null) {
+                        if (isMenuBlocking() === false) {
+                                let shuffled_set = shuffleCards(loaded_card.CARD_SET)
+        
+                                changeFlashcardSet(shuffled_set, "Shuffled")
+                        }
+                }
+        }
+});
+
+document.addEventListener("keydown", event => {
+        if (event.ctrlKey && event.shiftKey && event.key === "S") {
+                event.preventDefault();
+                shuffle_btn.click();
+        }
 });
