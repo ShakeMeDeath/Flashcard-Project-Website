@@ -553,12 +553,14 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+      position: relative;
 }
 .sidebar-screen.btn-svg-wrapper > svg {
 	scale: 0.7;
 	position: relative;
 	bottom: 4px;
 }
+
 .sidebar-screen.btn-title {
 	font-family: "Roboto", sans-serif;
 	position: relative;
@@ -573,6 +575,8 @@ body {
 }
 .sidebar-screen.keybind-tooltip {
 	color: var(--secondary-front-color);
+      position: relative;
+      bottom: 2px;
 	opacity: 0.5;
 	display: flex;
 	justify-content: center;
