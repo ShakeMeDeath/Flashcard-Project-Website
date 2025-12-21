@@ -334,6 +334,19 @@ function LoadCardSet(cardset_index) {
 	changeFlashcardSet(current_card_set.cards, current_card_set.title);
 }
 
+function downloadCard(card_files) {
+      const json = JSON.stringify(card_files, null, 2);
+      const blob = new Blob([json], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${card_files.title}.json`;
+      a.click();
+
+      URL.revokeObjectURL(url);
+}
+
 function loadCardFiles() {
 	loaded_flashcards_files.FILES_CONTAINER_ELEMENT.addEventListener("click", function (event) {
 
@@ -355,8 +368,15 @@ function loadCardFiles() {
 
 		new_cardset_element.querySelector(".cardset-template-item-title").textContent = current_card_set.title;
 		new_cardset_element.querySelector(".card-template-item").dataset.cardsetIndex = i;
+		new_cardset_element.querySelector(".cardset-template-save-btn-wrapper").dataset.cardsetIndex = i;
 		new_cardset_element.querySelector(".cardset-size-info").textContent = loaded_flashcards_files.CARD_SET_LIST[i].cards.length;
             new_cardset_element.querySelector(".card-template-item").classList.add("saved");
+            
+            // download feature
+            new_cardset_element.querySelector(".cardset-template-save-btn-wrapper").addEventListener("click", function() {
+                  const downloaded_card_set = loaded_flashcards_files.CARD_SET_LIST[this.dataset.cardsetIndex];
+                  downloadCard(downloaded_card_set)
+            })
 
 		loaded_flashcards_files.FILES_CONTAINER_ELEMENT.appendChild(new_cardset_element);
 	}
