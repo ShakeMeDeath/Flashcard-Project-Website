@@ -464,14 +464,14 @@ document.addEventListener("keydown", event => {
 });
 
 create_card_btn.addEventListener("click", function () {
-	triggerCardCreationMenu()
+	if (isMenuBlocking() === false) {
+		triggerCardCreationMenu()
+	}
 });
 
 document.addEventListener("keydown", event => {
 	if (event.ctrlKey && event.shiftKey && event.key === "Q") {
-		if (isMenuBlocking() === true) {
-			event.preventDefault();
-			create_card_btn.click();
-		}
+		event.preventDefault();
+		create_card_btn.click();
 	}
 });
