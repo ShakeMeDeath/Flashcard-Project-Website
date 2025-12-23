@@ -468,7 +468,7 @@ create_card_btn.addEventListener("click", function () {
 });
 
 document.addEventListener("keydown", event => {
-	if (event.ctrlKey && event.shiftKey && event.key === "N") {
+	if (event.ctrlKey && event.shiftKey && event.key === "Q") {
 		event.preventDefault();
 		create_card_btn.click();
 	}
