@@ -468,8 +468,10 @@ create_card_btn.addEventListener("click", function () {
 });
 
 document.addEventListener("keydown", event => {
-	if (event.ctrlKey && event.shiftKey && event.key === "N") {
-		event.preventDefault();
-		create_card_btn.click();
+	if (event.ctrlKey && event.shiftKey && event.key === "Q") {
+		if (isMenuBlocking() === true) {
+			event.preventDefault();
+			create_card_btn.click();
+		}
 	}
 });
