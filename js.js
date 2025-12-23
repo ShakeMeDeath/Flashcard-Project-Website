@@ -382,6 +382,10 @@ function triggerCardCreationMenu() {
 	document.querySelector(".card-creation.accept-btn").addEventListener("click", function () {
 		console.log(getNewCardsInput())
 	})
+
+	document.querySelector(".card-creation.close-menu-btn").addEventListener("click", function () {
+		closeEndMenu()
+	})
 }
 
 function loadCardFiles() {
