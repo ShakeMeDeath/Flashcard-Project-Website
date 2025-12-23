@@ -933,6 +933,7 @@ body:has(#sidebar-btn-input:checked) {
       /* margin-bottom: 20px; */
       display: flex;
       justify-content: center;
+      user-select: none;
 }
 
 .card-creation.description {
@@ -1019,6 +1020,7 @@ body:has(#sidebar-btn-input:checked) {
       resize: none;
       background: none;
       overflow: auto;
+      user-select: none;
 }
 
 .card-creation.new-card-divisor {
