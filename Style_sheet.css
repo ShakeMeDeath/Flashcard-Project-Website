@@ -866,3 +866,193 @@ body:has(#sidebar-btn-input:checked) {
 	height: 50%;
 	background-color: var(--muted-back-color);
 }
+
+/* card creation menu */
+
+.card-creation.menu-wrapper {
+      width: 70%;
+	max-height: 80%;
+      /* background-color: cyan; */
+}
+
+.card-creation.menu {
+      height: 100%;
+      width: 100%;
+      display: grid;
+      grid-template-rows: 6fr 2fr;
+}
+
+.card-creation.input-wrapper-info {
+      background-color: var(--primary-back-color);
+      row-gap: 30px;
+      border-radius: 40px;
+      border: solid 3px var(--muted-back-color);
+      height: 100%;
+      padding: 30px;
+      display: grid;
+      grid-template-rows: 1.7rem 60px 0px;
+      font-size: 1.7rem;
+      overflow: hidden;
+}
+.card-creation.input-info-container {
+      width: 100%;
+      display: flex;
+      /* justify-content: space-between; */
+      align-items: center;
+}
+
+#new-card-name-input {
+      background-color: var(--primary-front-color);
+      border-radius: 20px;
+      outline: none;
+      height: 100%;
+      font-size: 1.5rem;
+      padding-left: 15px;
+      width: 50%;
+      border: none;
+      user-select: none;
+}
+
+#new-card-description-input {
+      background-color: var(--primary-front-color);
+      border-radius: 20px;
+      outline: none;
+      height: 100%;
+      font-size: 1.5rem;
+      padding-left: 15px;
+      width: 100%;
+      border: none;
+      user-select: none;
+}
+
+.card-creation.title {
+      font-size: 100%;
+      color: var(--primary-front-color);
+      font-family: "Roboto", sans-serif;
+      font-weight: 600;
+      /* margin-bottom: 20px; */
+      display: flex;
+      justify-content: center;
+}
+
+.card-creation.description {
+      font-size: 1.7rem;
+      color: var(--primary-front-color);
+      font-family: "Roboto", sans-serif;
+      font-weight: 600;
+}
+
+.card-creation.input-container-cards {
+      width: 100%;
+      /* max-height: 50%; */
+      height: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      overflow-y: auto;
+      row-gap: 30px;
+      column-gap: 30px;
+      align-content: flex-start;
+}
+
+.no-scroll-bar::-webkit-scrollbar {
+      display: none;
+}
+
+.card-creation.new-card-input-container {
+      flex-shrink: 0;
+      flex-grow: 1;
+      width: clamp(225px, calc(1/3*100% - (2 * 30px / 3)), 300px);
+      background-color: var(--primary-front-color);
+      border-radius: 30px;
+      height: 40%;
+      display: grid;
+      grid-template-rows: 1fr 4px 1fr;
+}
+.card-creation.add-card-btn {
+      flex-shrink: 0;
+      flex-grow: 1;
+      width: clamp(225px, calc(1/3*100% - (2 * 30px / 3)), 300px);
+      background-color: var(--secondary-front-color);
+      border-radius: 30px;
+      opacity: 0.5;
+      height: 40%;
+      scale: 0.8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+}
+
+.card-creation.add-card-btn-wrapper {
+      height: 100%;
+      aspect-ratio: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+}
+
+.card-creation.card-svg {
+      color: var(--primary-back-color);
+      opacity: 1;
+      scale: 0.4;
+      position: relative;
+      bottom: 5px;
+}
+.card-creation.tooltip {
+      color: var(--primary-back-color);
+      font-family: "Roboto", sans-serif;
+      font-weight: 600;
+      position: absolute;
+      bottom: 20px;
+      font-size: 1.2rem;
+      user-select: none;
+}
+
+.new-card-input-front, .new-card-input-back {
+      outline: none;
+      border: none;
+      width: 100%;
+      /* height: 50%; */
+      padding: 15px 20px 0 20px;
+      font-size: 1.2rem;
+      resize: none;
+      background: none;
+      overflow: auto;
+}
+
+.card-creation.new-card-divisor {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+}
+.card-creation.new-card-divisor::after {
+      content: "";
+      width: 90%;
+      border-radius: 2px;
+      height: 100%;
+      background-color: var(--secondary-front-color);
+      opacity: 0.5;
+}
+.card-creation.menu-btn-container {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: end;
+      height: 100%;
+}
+
+.card-creation.close-menu-btn, .card-creation.accept-btn {
+      box-sizing: border-box;
+	width: 200px;
+	height: 70%;
+	border-radius: 25px;
+	border: solid var(--muted-back-color) 3px;
+	background-color: var(--primary-back-color);
+	display: grid;
+	grid-template-rows: 70% 30%;
+	padding-bottom: 10px;
+	position: relative;
+	/* padding: 10px; */
+	color: var(--muted-back-color);
+	transition: scale 0.2s, color 0.2s, filter 0.2s;
+}

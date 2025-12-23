@@ -35,6 +35,8 @@ let open_folder_input = document.getElementById("open-folder-input");
 
 let shuffle_btn = document.getElementById("shuffle-card-btn");
 
+let create_card_btn = document.getElementById("create-card-btn");
+
 let loaded_flashcards_files = {
 	CARD_FILES: null,
 	CARD_SET_LIST: [],
@@ -347,6 +349,34 @@ function downloadCard(card_files) {
       URL.revokeObjectURL(url);
 }
 
+function getNewCardInput() {
+        return Array.from(document.querySelectorAll('.card-creation.new-card-input-container'))
+                .map(pair => {
+                        const front = pair.querySelector('.new-card-input-front')?.value.trim()
+                        const back = pair.querySelector('.new-card-input-back')?.value.trim()
+
+                        if (!front || !back) return null
+
+                        return { front, back }
+                })
+                .filter(card => card !== null)
+}
+
+function triggerCardCreationMenu() {
+      let newcard_menu_clone = document.getElementById("card-creation-menu").content.cloneNode(true);
+      let add_card_btn = newcard_menu_clone.querySelector(".card-creation.add-card-btn")
+
+      document.querySelector(".card-screen").appendChild(newcard_menu_clone);
+
+      add_card_btn.addEventListener("click", function () {
+            let new_card_container = document.querySelector(".card-creation.input-container-cards")
+            let new_card_clone = document.getElementById("new-card-input").content.cloneNode(true);
+
+            new_card_container.prepend(new_card_clone);
+      })
+
+}
+
 function loadCardFiles() {
 	loaded_flashcards_files.FILES_CONTAINER_ELEMENT.addEventListener("click", function (event) {
 
@@ -419,5 +449,16 @@ document.addEventListener("keydown", event => {
 	if (event.ctrlKey && event.shiftKey && event.key === "S") {
 		event.preventDefault();
 		shuffle_btn.click();
+	}
+});
+
+create_card_btn.addEventListener("click", function () {
+      triggerCardCreationMenu()
+});
+
+document.addEventListener("keydown", event => {
+	if (event.ctrlKey && event.shiftKey && event.key === "N") {
+		event.preventDefault();
+		create_card_btn.click();
 	}
 });
