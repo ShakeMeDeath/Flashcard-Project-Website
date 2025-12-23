@@ -1048,11 +1048,30 @@ body:has(#sidebar-btn-input:checked) {
 	border-radius: 25px;
 	border: solid var(--muted-back-color) 3px;
 	background-color: var(--primary-back-color);
-	display: grid;
-	grid-template-rows: 70% 30%;
-	padding-bottom: 10px;
 	position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 	/* padding: 10px; */
 	color: var(--muted-back-color);
 	transition: scale 0.2s, color 0.2s, filter 0.2s;
+}
+.card-creation.close-menu-btn:hover {
+      color: var(--main-red);
+      filter: brightness(1.1);
+      scale: 1.05;
+}
+
+.card-creation.close-menu-btn > svg {
+      scale: 0.7;
+}
+
+.card-creation.accept-btn:hover {
+      color: var(--main-green);
+      filter: brightness(1.1);
+      scale: 1.05;
+}
+
+.card-creation.accept-btn > svg {
+      scale: 0.6;
 }
