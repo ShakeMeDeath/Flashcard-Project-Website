@@ -337,44 +337,51 @@ function LoadCardSet(cardset_index) {
 }
 
 function downloadCard(card_files) {
-      const json = JSON.stringify(card_files, null, 2);
-      const blob = new Blob([json], { type: "application/json" });
-      const url = URL.createObjectURL(blob);
+	const json = JSON.stringify(card_files, null, 2);
+	const blob = new Blob([json], { type: "application/json" });
+	const url = URL.createObjectURL(blob);
 
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `${card_files.title}.json`;
-      a.click();
+	const a = document.createElement("a");
+	a.href = url;
+	a.download = `${card_files.title}.json`;
+	a.click();
 
-      URL.revokeObjectURL(url);
+	URL.revokeObjectURL(url);
 }
 
-function getNewCardInput() {
-        return Array.from(document.querySelectorAll('.card-creation.new-card-input-container'))
-                .map(pair => {
-                        const front = pair.querySelector('.new-card-input-front')?.value.trim()
-                        const back = pair.querySelector('.new-card-input-back')?.value.trim()
+function getNewCardsInput() {
+	const card_face_info = Array.from(document.querySelectorAll('.card-creation.new-card-input-container')).map(pair => {
+		const front = pair.querySelector('.new-card-input-front')?.value.trim()
+		const back = pair.querySelector('.new-card-input-back')?.value.trim()
 
-                        if (!front || !back) return null
+		if (!front || !back) return null
 
-                        return { front, back }
-                })
-                .filter(card => card !== null)
+		return { front, back }
+		
+	}).filter(card => card !== null)
+
+	const name = document.getElementById('new-card-name-input')?.value
+	const description = document.getElementById('new-card-description-input')?.value
+
+	return { name, description, card_face_info}
 }
 
 function triggerCardCreationMenu() {
-      let newcard_menu_clone = document.getElementById("card-creation-menu").content.cloneNode(true);
-      let add_card_btn = newcard_menu_clone.querySelector(".card-creation.add-card-btn")
+	let newcard_menu_clone = document.getElementById("card-creation-menu").content.cloneNode(true);
+	let add_card_btn = newcard_menu_clone.querySelector(".card-creation.add-card-btn")
 
-      document.querySelector(".card-screen").appendChild(newcard_menu_clone);
+	document.querySelector(".card-screen").appendChild(newcard_menu_clone);
 
-      add_card_btn.addEventListener("click", function () {
-            let new_card_container = document.querySelector(".card-creation.input-container-cards")
-            let new_card_clone = document.getElementById("new-card-input").content.cloneNode(true);
+	add_card_btn.addEventListener("click", function () {
+		let new_card_container = document.querySelector(".card-creation.input-container-cards")
+		let new_card_clone = document.getElementById("new-card-input").content.cloneNode(true);
 
-            new_card_container.prepend(new_card_clone);
-      })
+		new_card_container.prepend(new_card_clone);
+	})
 
+	document.querySelector(".card-creation.accept-btn").addEventListener("click", function () {
+		console.log(getNewCardsInput())
+	})
 }
 
 function loadCardFiles() {
@@ -400,13 +407,13 @@ function loadCardFiles() {
 		new_cardset_element.querySelector(".card-template-item").dataset.cardsetIndex = i;
 		new_cardset_element.querySelector(".cardset-template-save-btn-wrapper").dataset.cardsetIndex = i;
 		new_cardset_element.querySelector(".cardset-size-info").textContent = loaded_flashcards_files.CARD_SET_LIST[i].cards.length;
-            new_cardset_element.querySelector(".card-template-item").classList.add("saved");
-            
-            // download feature
-            new_cardset_element.querySelector(".cardset-template-save-btn-wrapper").addEventListener("click", function() {
-                  const downloaded_card_set = loaded_flashcards_files.CARD_SET_LIST[this.dataset.cardsetIndex];
-                  downloadCard(downloaded_card_set)
-            })
+		new_cardset_element.querySelector(".card-template-item").classList.add("saved");
+		
+		// download feature
+		new_cardset_element.querySelector(".cardset-template-save-btn-wrapper").addEventListener("click", function() {
+			const downloaded_card_set = loaded_flashcards_files.CARD_SET_LIST[this.dataset.cardsetIndex];
+			downloadCard(downloaded_card_set)
+		})
 
 		loaded_flashcards_files.FILES_CONTAINER_ELEMENT.appendChild(new_cardset_element);
 	}
@@ -453,7 +460,7 @@ document.addEventListener("keydown", event => {
 });
 
 create_card_btn.addEventListener("click", function () {
-      triggerCardCreationMenu()
+	triggerCardCreationMenu()
 });
 
 document.addEventListener("keydown", event => {
