@@ -30,12 +30,6 @@ body {
 	transition: grid-template-columns 0.3s;
 }
 
-@media (max-width: 1400px) {
-	body {
-		grid-template-columns: 30% 70%;
-	}
-}
-
 /* Card */
 
 .card-screen {
