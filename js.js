@@ -43,6 +43,18 @@ let loaded_flashcards_files = {
 	FILES_CONTAINER_ELEMENT: document.querySelector(".card-list-container"),
 }
 
+loaded_flashcards_files.FILES_CONTAINER_ELEMENT.addEventListener("click", function (event) {
+
+		let cardset_template_btn = event.target;
+		if (cardset_template_btn.classList.contains("card-template-item")) {
+			
+			if (isMenuBlocking() === false) {
+				loaded_card.CASH_CARD_INDEX = cardset_template_btn.dataset.cardsetIndex
+				LoadCardSet(cardset_template_btn.dataset.cardsetIndex);
+			}
+		}
+	});
+
 function getRandomInt(max) {
 	return Math.floor(Math.random() * max);
 }
@@ -434,17 +446,6 @@ function triggerCardCreationMenu() {
 }
 
 function loadCardsFiles() {
-	loaded_flashcards_files.FILES_CONTAINER_ELEMENT.addEventListener("click", function (event) {
-
-		let cardset_template_btn = event.target;
-		if (cardset_template_btn.classList.contains("card-template-item")) {
-			
-			if (isMenuBlocking() === false) {
-				loaded_card.CASH_CARD_INDEX = cardset_template_btn.dataset.cardsetIndex
-				LoadCardSet(cardset_template_btn.dataset.cardsetIndex);
-			}
-		}
-	});
 
 	for (let i = 0; i < loaded_flashcards_files.CARD_SET_LIST.length; i++) {
 
