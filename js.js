@@ -412,6 +412,10 @@ function triggerCardCreationMenu() {
 		let new_card_container = document.querySelector(".card-creation.input-container-cards")
 		let new_card_clone = document.getElementById("new-card-input").content.cloneNode(true);
 
+            new_card_clone.querySelector(".card-creation.card-swicth-btn").addEventListener("click", function() {
+                  this.classList.toggle('swapped');
+            })
+
 		new_card_container.prepend(new_card_clone);
 	})
 

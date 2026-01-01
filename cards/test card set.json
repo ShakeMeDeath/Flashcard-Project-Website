@@ -1,0 +1,18 @@
+{
+  "title": "test card set",
+  "description": "im a test card set",
+  "cards": [
+    {
+      "front": "aaaaaaaaaaaaa",
+      "back": "aaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "front": "do i work ?",
+      "back": "probably not"
+    },
+    {
+      "front": "i hope sooo ???",
+      "back": "okk"
+    }
+  ]
+}
