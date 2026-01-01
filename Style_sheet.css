@@ -883,8 +883,7 @@ body:has(#sidebar-btn-input:checked) {
       border: solid 3px var(--muted-back-color);
       height: 100%;
       display: grid;
-      grid-template-rows: 1.7rem 60px 0px;
-      font-size: 1.7rem;
+      grid-template-rows: 80px 60px 1fr;
       overflow: hidden;
 }
 .card-creation.input-info-container {
@@ -920,13 +919,14 @@ body:has(#sidebar-btn-input:checked) {
 }
 
 .card-creation.title {
-      font-size: 100%;
+      font-size: 2.5rem;
       color: var(--primary-front-color);
       font-family: "Roboto", sans-serif;
       font-weight: 600;
       /* margin-bottom: 20px; */
       display: flex;
       justify-content: center;
+      align-items: end;
       user-select: none;
 }
 
