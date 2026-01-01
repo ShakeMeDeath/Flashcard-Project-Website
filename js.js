@@ -426,6 +426,11 @@ function triggerCardCreationMenu() {
 
             new_card_clone.querySelector(".card-creation.card-swicth-btn").addEventListener("click", function() {
                   this.classList.toggle('swapped');
+
+                  this.classList.remove("spin");
+                  void this.offsetWidth; // force reflow
+                  this.classList.add("spin");
+
             })
 
 		new_card_container.prepend(new_card_clone);

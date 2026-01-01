@@ -1011,12 +1011,26 @@ body:has(#sidebar-btn-input:checked) {
       width: 50px;
       height: 50px;
       border-radius: 100%;
+      transition: 0.3s;
       border: solid 5px var(--primary-back-color);
+}
+
+.spin {
+      animation: spin 0.5s ease-in-out;
 }
 
 .card-creation.card-swicth-btn > svg {
       color: var(--secondary-front-color);
       scale: 0.7;
+}
+
+@keyframes spin {
+      from {
+            rotate: 0deg;
+      }
+      to {
+            rotate: -360deg;
+      }
 }
 
 .new-card-input-front-wrapper, .new-card-input-back-wrapper {
@@ -1112,10 +1126,13 @@ body:has(#sidebar-btn-input:checked) {
 }
 
 /* Active swap state */
-.swapped ~ .new-card-input-front-wrapper {
-      z-index: 1;
+.new-card-input-back-wrapper {
+      visibility: hidden;
+      opacity: 0;
+      transition: 0.3s;
 }
 
-.swapped ~ .new-card-input-back-wrapper {
-      z-index: 2;
+.card-creation.card-swicth-btn.swapped ~ .new-card-input-back-wrapper {
+      visibility: visible;
+      opacity: 1;
 }
