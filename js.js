@@ -59,6 +59,12 @@ function getRandomInt(max) {
 	return Math.floor(Math.random() * max);
 }
 
+function closeMenu_And_HideCardSet() {
+      toggleHide(card_ui_wrapper, true)
+      closeEndMenu()
+      loaded_card.CARD_SET = null;
+}
+
 function createShuffleMap(card_set) {
 	// generate random map list
 	const arr = [];
@@ -193,12 +199,6 @@ function triggerEndMenu() {
 	clone.querySelector(".redo-btn").addEventListener("click", function() {
 		closeEndMenu();
 		changeFlashcardSet(loaded_flashcards_files.CARD_SET_LIST[loaded_card.CASH_CARD_INDEX].cards, loaded_card.CARD_NAME);
-	})
-	
-	clone.querySelector(".exit-btn").addEventListener("click", function() {
-		toggleHide(card_ui_wrapper, true)
-		closeEndMenu()
-		loaded_card.CARD_SET = null;
 	})
 	
 	document.querySelector(".card-screen").appendChild(clone);

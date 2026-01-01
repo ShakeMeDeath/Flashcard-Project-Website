@@ -68,7 +68,7 @@
 					<div class="card-face card-back"></div>
 				</div>
 			</div>
-			<div class="card-ctrl-container">
+			<div class="menu-ctrl-container">
 				<div class="card-menu progress-bar-container">
 					<div class="card-menu progress-bar"></div>
 
@@ -157,7 +157,7 @@
 					</div>
 					<div class="end-menu tooltip">Redo All</div>
 				</div>
-				<div class="menu-ctrl-btn exit-btn">
+				<div class="menu-ctrl-btn" onclick="closeMenu_And_HideCardSet()">
 					<div class="end-menu svg-wrapper">
 						<svg class="end-menu cross-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentcolor" stroke-width="0.36"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M6.99486 7.00636C6.60433 7.39689 6.60433 8.03005 6.99486 8.42058L10.58 12.0057L6.99486 15.5909C6.60433 15.9814 6.60433 16.6146 6.99486 17.0051C7.38538 17.3956 8.01855 17.3956 8.40907 17.0051L11.9942 13.4199L15.5794 17.0051C15.9699 17.3956 16.6031 17.3956 16.9936 17.0051C17.3841 16.6146 17.3841 15.9814 16.9936 15.5909L13.4084 12.0057L16.9936 8.42059C17.3841 8.03007 17.3841 7.3969 16.9936 7.00638C16.603 6.61585 15.9699 6.61585 15.5794 7.00638L11.9942 10.5915L8.40907 7.00636C8.01855 6.61584 7.38538 6.61584 6.99486 7.00636Z" fill="currentcolor"></path> </g></svg>
 					</div>
@@ -198,35 +198,33 @@
 </template>
 <template id="card-creation-menu">
       <div class="dim appear">
-            <div class="card-creation menu-wrapper">
-                  <div class="card-creation menu">
-                        <div class="card-creation input-wrapper-info">
-                              <div class="card-creation title">Create Cards</div>
-                              <div class="card-creation input-info-container">
-                                    <input type="text" id="new-card-name-input" name="setName" placeholder="Name ...">
-                                    <!-- <label for="setName"></label> -->
-                                    <div style="width: 40px;"></div>
-                                    <!-- <div class="card-creation description">Flashcards Description</div> -->
-                                    <input type="text" id="new-card-description-input" name="setDescription" placeholder="Description ...">
-                                    <!-- <label for="setDescription"> -->
-                                    <!-- </label> -->
-                              </div>
-                              <div class="card-creation input-container-cards no-scroll-bar">
-                                    <div class="card-creation add-card-btn" type="button">
-                                          <div class="card-creation add-card-btn-wrapper">
-                                                <svg class="card-creation card-svg" xmlns="http://www.w3.org/2000/svg" viewBox="176.6728 121.2309 251.9369 252.3937" width="251.937px" height="252.394px"><path fill-rule="evenodd" clip-rule="evenodd" d="M 2.109 13.337 C 2.109 11.68 3.452 10.337 5.109 10.337 L 15.109 10.337 C 16.241 10.337 17.227 10.964 17.738 11.89 L 21.948 13.018 C 23.548 13.447 24.498 15.092 24.069 16.693 L 20.446 30.216 C 20.017 31.816 18.372 32.766 16.771 32.337 L 9.307 30.337 L 5.109 30.337 C 3.452 30.337 2.109 28.994 2.109 27.337 L 2.109 13.337 Z M 18.109 27.337 L 18.109 14.06 L 21.43 14.95 C 21.964 15.093 22.28 15.642 22.137 16.175 L 18.514 29.698 C 18.371 30.231 17.822 30.548 17.289 30.405 L 16.229 30.121 C 17.331 29.677 18.109 28.598 18.109 27.337 Z M 5.109 12.337 C 4.556 12.337 4.109 12.785 4.109 13.337 L 4.109 27.337 C 4.109 27.889 4.556 28.337 5.109 28.337 L 15.109 28.337 C 15.661 28.337 16.109 27.889 16.109 27.337 L 16.109 13.337 C 16.109 12.785 15.661 12.337 15.109 12.337 L 5.109 12.337 Z" fill="currentcolor" transform="matrix(11.418966293334961, 0, 0, 11.418966293334961, 152.5902099609375, 3.1930410861968994)"/></svg>
-                                                <div class="card-creation tooltip">add card</div>
-                                          </div>
+            <div class="menu">
+                  <div class="card-creation input-wrapper-info">
+                        <div class="card-creation title">Create Cards</div>
+                        <div class="card-creation input-info-container">
+                              <input type="text" id="new-card-name-input" name="setName" placeholder="Name ...">
+                              <!-- <label for="setName"></label> -->
+                              <div style="width: 40px;"></div>
+                              <!-- <div class="card-creation description">Flashcards Description</div> -->
+                              <input type="text" id="new-card-description-input" name="setDescription" placeholder="Description ...">
+                              <!-- <label for="setDescription"> -->
+                              <!-- </label> -->
+                        </div>
+                        <div class="card-creation input-container-cards no-scroll-bar">
+                              <div class="card-creation add-card-btn" type="button">
+                                    <div class="card-creation add-card-btn-wrapper">
+                                          <svg class="card-creation card-svg" xmlns="http://www.w3.org/2000/svg" viewBox="176.6728 121.2309 251.9369 252.3937" width="251.937px" height="252.394px"><path fill-rule="evenodd" clip-rule="evenodd" d="M 2.109 13.337 C 2.109 11.68 3.452 10.337 5.109 10.337 L 15.109 10.337 C 16.241 10.337 17.227 10.964 17.738 11.89 L 21.948 13.018 C 23.548 13.447 24.498 15.092 24.069 16.693 L 20.446 30.216 C 20.017 31.816 18.372 32.766 16.771 32.337 L 9.307 30.337 L 5.109 30.337 C 3.452 30.337 2.109 28.994 2.109 27.337 L 2.109 13.337 Z M 18.109 27.337 L 18.109 14.06 L 21.43 14.95 C 21.964 15.093 22.28 15.642 22.137 16.175 L 18.514 29.698 C 18.371 30.231 17.822 30.548 17.289 30.405 L 16.229 30.121 C 17.331 29.677 18.109 28.598 18.109 27.337 Z M 5.109 12.337 C 4.556 12.337 4.109 12.785 4.109 13.337 L 4.109 27.337 C 4.109 27.889 4.556 28.337 5.109 28.337 L 15.109 28.337 C 15.661 28.337 16.109 27.889 16.109 27.337 L 16.109 13.337 C 16.109 12.785 15.661 12.337 15.109 12.337 L 5.109 12.337 Z" fill="currentcolor" transform="matrix(11.418966293334961, 0, 0, 11.418966293334961, 152.5902099609375, 3.1930410861968994)"/></svg>
+                                          <div class="card-creation tooltip">add card</div>
                                     </div>
                               </div>
                         </div>
-                        <div class="card-creation menu-btn-container">
-                              <div class="card-creation close-menu-btn">
-                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentcolor" stroke-width="0.36"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M6.99486 7.00636C6.60433 7.39689 6.60433 8.03005 6.99486 8.42058L10.58 12.0057L6.99486 15.5909C6.60433 15.9814 6.60433 16.6146 6.99486 17.0051C7.38538 17.3956 8.01855 17.3956 8.40907 17.0051L11.9942 13.4199L15.5794 17.0051C15.9699 17.3956 16.6031 17.3956 16.9936 17.0051C17.3841 16.6146 17.3841 15.9814 16.9936 15.5909L13.4084 12.0057L16.9936 8.42059C17.3841 8.03007 17.3841 7.3969 16.9936 7.00638C16.603 6.61585 15.9699 6.61585 15.5794 7.00638L11.9942 10.5915L8.40907 7.00636C8.01855 6.61584 7.38538 6.61584 6.99486 7.00636Z" fill="currentcolor"></path> </g></svg>
-                              </div>
-                              <div class="card-creation accept-btn">
-                                    <svg viewBox="0 0 24 24" id="_24x24_On_Light_Checkmark" data-name="24x24/On Light/Checkmark" xmlns="http://www.w3.org/2000/svg" fill="currentcolor" stroke="currentcolor" stroke-width="0.8399999999999999"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <rect id="view-box" width="24" height="24" fill="#currentcolor" opacity="0"></rect> <path id="Shape" d="M5.341,12.247a1,1,0,0,0,1.317,1.505l4-3.5a1,1,0,0,0,.028-1.48l-9-8.5A1,1,0,0,0,.313,1.727l8.2,7.745Z" transform="translate(19 6.5) rotate(90)" fill="#currentcolor"></path> </g></svg>
-                              </div>
+                  </div>
+                  <div class="menu-ctrl-container">
+                        <div class="menu-ctrl-btn" onclick="closeEndMenu()">
+                              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentcolor" stroke-width="0.36"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M6.99486 7.00636C6.60433 7.39689 6.60433 8.03005 6.99486 8.42058L10.58 12.0057L6.99486 15.5909C6.60433 15.9814 6.60433 16.6146 6.99486 17.0051C7.38538 17.3956 8.01855 17.3956 8.40907 17.0051L11.9942 13.4199L15.5794 17.0051C15.9699 17.3956 16.6031 17.3956 16.9936 17.0051C17.3841 16.6146 17.3841 15.9814 16.9936 15.5909L13.4084 12.0057L16.9936 8.42059C17.3841 8.03007 17.3841 7.3969 16.9936 7.00638C16.603 6.61585 15.9699 6.61585 15.5794 7.00638L11.9942 10.5915L8.40907 7.00636C8.01855 6.61584 7.38538 6.61584 6.99486 7.00636Z" fill="currentcolor"></path> </g></svg>
+                        </div>
+                        <div class="menu-ctrl-btn">
+                              <svg viewBox="0 0 24 24" id="_24x24_On_Light_Checkmark" data-name="24x24/On Light/Checkmark" xmlns="http://www.w3.org/2000/svg" fill="currentcolor" stroke="currentcolor" stroke-width="0.8399999999999999"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <rect id="view-box" width="24" height="24" fill="#currentcolor" opacity="0"></rect> <path id="Shape" d="M5.341,12.247a1,1,0,0,0,1.317,1.505l4-3.5a1,1,0,0,0,.028-1.48l-9-8.5A1,1,0,0,0,.313,1.727l8.2,7.745Z" transform="translate(19 6.5) rotate(90)" fill="#currentcolor"></path> </g></svg>
                         </div>
                   </div>
             </div>
