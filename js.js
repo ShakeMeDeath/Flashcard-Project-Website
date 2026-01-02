@@ -379,9 +379,9 @@ function getNewCardsInput() {
 
 function convertToNewCard(unconverted_card) {
       let converted_card = {
-            "title" : unconverted_card.name,
-            "description" : unconverted_card.description,
-            "cards" : unconverted_card.card_face_info
+            title : unconverted_card.name,
+            description : unconverted_card.description,
+            cards : unconverted_card.card_face_info
       }
 
       return converted_card
@@ -433,17 +433,43 @@ function triggerCardCreationMenu() {
 		new_card_container.prepend(new_card_clone);
 	})
 
-	document.getElementById("proceed-create-card-btn").addEventListener("click", function () {
+      // const name_input = newcard_menu_clone.getElementById("new-card-name-input")
+      // const desc_input = newcard_menu_clone.getElementById("new-card-description-input")
+
+      const proceed_btn = document.getElementById("proceed-create-card-btn")
+
+      // function checkInputs() {
+      //       const nameFilled = name_input.value.trim() !== "";
+      //       const descFilled = desc_input.value.trim() !== "";
+
+      //       proceed_btn.disabled = !(nameFilled && descFilled);
+      // }
+
+      // name_input.addEventListener("input", checkInputs);
+      // desc_input.addEventListener("input", checkInputs);
+
+
+	proceed_btn.addEventListener("click", function () {
 		let new_card = getNewCardsInput();
-            closeEndMenu()
             new_card = convertToNewCard(new_card);
+
+            if (new_card.title == "") {
+                  console.error("null")
+                  return 0;
+            } if (new_card.description == "") {
+                  console.error("null")
+                  return 0;
+            } if (new_card.cards == "") {
+                  console.error("null")
+                  return 0;
+            }
+
+            proceed_btn.disabled = true;
 
             loaded_flashcards_files.CARD_SET_LIST.push(new_card)
             loadCardFromObj(new_card, loaded_flashcards_files.CARD_SET_LIST.length - 1, true)
-	})
-
-	document.querySelector(".card-creation.close-menu-btn").addEventListener("click", function () {
-		closeEndMenu()
+            
+            closeEndMenu()
 	})
 }
 
