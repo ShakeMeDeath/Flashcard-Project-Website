@@ -44,7 +44,7 @@ body {
 	width: 50%;
 	height: 80%;
 	display: grid;
-	grid-template-rows: 5fr 1fr;
+	grid-template-rows: 1fr 150px;
 	position: relative;
 }
 .card-screen:has(.card-ui-wrapper.isHidden)::after {
@@ -351,7 +351,7 @@ body {
 	width: 50%;
 	height: 80%;
 	display: grid;
-	grid-template-rows: 5fr 2fr;
+	grid-template-rows: 1fr 150px;
 }
 .end-menu-num {
 	font-size: 6rem;
@@ -385,13 +385,13 @@ body {
 .menu-ctrl-container {
 	display: flex;
 	justify-content: space-evenly;
-	align-items: center;
-	height: max(100%, 150px);
+	align-items: end;
+	height: 100%;
 }
 .menu-ctrl-btn {
 	box-sizing: border-box;
 	width: 150px;
-	height: 50%;
+	height: 80%;
 	border-radius: 25px;
 	border: solid var(--muted-back-color) 3px;
 	background-color: var(--primary-back-color);
@@ -408,13 +408,6 @@ body {
 	filter: brightness(1.1);
 }
 
-.end-menu.svg-wrapper {
-	max-height: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	position: relative;
-}
 .end-menu.redo-svg-fails {
 	position: absolute;
 	right: 20px;
@@ -422,23 +415,22 @@ body {
 	width: 20%;
 }
 
-.cross-svg, .redo-svg, .fail-symbol {
-	scale: 0.9;
+.menu-btn-svg-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+}
+
+.menu-btn-svg-wrapper > svg {
 	height: 100%;
 	position: relative;
 	top: 10px;
 }
 
-
-.menu-ctrl-btn:hover.redo-fails-btn {
-	color: var(--main-orange);
-}
-.menu-ctrl-btn:hover.exit-btn {
-	color: var(--main-red);
-}
-
-.cross-svg {
-	scale: 1.5;
+.sidebar-btn-svg-wrapper > svg {
+      scale: 0.7;
+      position: relative;
+      bottom: 2.5px;
 }
 
 .end-menu.tooltip {

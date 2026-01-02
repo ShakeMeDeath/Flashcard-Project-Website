@@ -436,7 +436,7 @@ function triggerCardCreationMenu() {
 		new_card_container.prepend(new_card_clone);
 	})
 
-	document.querySelector(".card-creation.accept-btn").addEventListener("click", function () {
+	document.getElementById("proceed-create-card-btn").addEventListener("click", function () {
 		let new_card = getNewCardsInput();
             closeEndMenu()
             new_card = convertToNewCard(new_card);
