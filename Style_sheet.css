@@ -436,7 +436,7 @@ body {
 .end-menu.tooltip {
 	display: flex;
 	justify-content: center;
-	align-items: center;
+	align-items: end;
 	font-weight: 600;
 	font-size: 0.8rem;
 	font-family: "Roboto", sans-serif;
@@ -1127,4 +1127,12 @@ body:has(#sidebar-btn-input:checked) {
 .card-creation.card-swicth-btn.swapped ~ .new-card-input-back-wrapper {
       visibility: visible;
       opacity: 1;
+}
+
+.small-redo-svg {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      width: 40px;
+      height: 40px;
 }
