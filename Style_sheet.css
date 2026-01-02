@@ -348,7 +348,7 @@ body {
 	
 }
 .menu {
-	width: 50%;
+	width: 65%;
 	height: 80%;
 	display: grid;
 	grid-template-rows: 1fr 150px;
