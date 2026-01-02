@@ -323,7 +323,6 @@ function changeCard(index) {
 // flashcard_set
 
 function changeFlashcardSet(card_set_cards, card_set_title) {
-	// console.log(card_set);
 	
 	loaded_card.CARD_NAME = card_set_title;
 	loaded_card.CARD_PROGRESSION = [];
@@ -389,8 +388,6 @@ function convertToNewCard(unconverted_card) {
 }
 
 function loadCardFromObj(card_to_load, index, unsaved) {
-
-      console.log(card_to_load.cards)
 
       let new_cardset_element = document.getElementById("cardset-template").content.cloneNode(true);
 
