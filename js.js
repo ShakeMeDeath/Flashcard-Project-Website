@@ -228,6 +228,26 @@ function gotoNextCard(awnserStatus) {
 	doCardAnim(awnserStatus, loaded_card.CARD_NAME);
 }
 
+function removeProgression() {
+      loaded_card.CARD_PROGRESSION.splice(loaded_card.CARD_PROGRESSION.length - 1, 1)
+}
+
+function gotoLastCard(awnserStatus) {
+      
+      if (loaded_card.CARD_INDEX <= 0) {
+		return 0;
+	} else {
+            loaded_card.CARD_INDEX--
+		changeCard(loaded_card.CARD_INDEX)
+
+            // remove last item
+            removeProgression()
+
+            changeProgressBar(loaded_card.CARD_INDEX, loaded_card.CARD_SET.length - 1);
+            doCardAnim(awnserStatus, loaded_card.CARD_NAME);
+	}
+}
+
 // Card Flipping
 
 function flipCard(element) {
@@ -249,21 +269,27 @@ document.body.addEventListener('keydown', function(event) {
 	
 		} else if (event.code === 'ArrowLeft') {
 			if (isMenuBlocking() === false) gotoNextCard(awnser_status.UNKNOWN);
+
+		} else if (event.code === 'Backspace') {
+			if (isMenuBlocking() === false) gotoLastCard(awnser_status.UNKNOWN);
 		}
 	}
-
 });
 
 // button detection
 
 let unkown_btn = document.getElementById("unknown-btn");
 let kown_btn = document.getElementById("known-btn");
+let return_btn = document.getElementById("return-btn");
 
 unkown_btn.addEventListener("click", function() {
 	if (isMenuBlocking() == false) gotoNextCard(awnser_status.UNKNOWN);
 });
 kown_btn.addEventListener("click", function() {
 	if (isMenuBlocking() == false) gotoNextCard(awnser_status.KNOWN);
+});
+return_btn.addEventListener("click", function() {
+	if (isMenuBlocking() == false) gotoLastCard(awnser_status.UNKNOWN);
 });
 
 function isCardFliped() {
