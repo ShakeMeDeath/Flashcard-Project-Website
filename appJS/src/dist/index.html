@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Flippy</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" crossorigin href="/assets/index-Dj_d3vRW.css">
+</head>
+<body>
+	<div class="sidebar">
+		<div class="sidebar-btn">
+			<input type="checkbox" id="sidebar-btn-input" style="display: none;">
+			<label class="sidebar-btn-label" for="sidebar-btn-input">
+				<svg viewBox="-2.4 -2.4 28.80 28.80" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M6 4C4.34315 4 3 5.34315 3 7V17C3 18.6569 4.34315 20 6 20H18C19.6569 20 21 18.6569 21 17V7C21 5.34315 19.6569 4 18 4H6ZM5 7C5 6.44772 5.44772 6 6 6H9V18H6C5.44772 18 5 17.5523 5 17V7ZM11 18H18C18.5523 18 19 17.5523 19 17V7C19 6.44772 18.5523 6 18 6H11V18Z" fill="currentcolor"></path> </g></svg>
+			</label>
+		</div>
+		<div class="card-manager">
+			<div class="sidebar-title-container">
+				<div class="sidebar-title">Flippy</div>
+				<div class="software-version">v1.0.0</div>
+			</div>
+			<div class="sidebar-divisor"></div>
+			<div class="sidebar-btns-container">
+				<div class="sidebar-screen btn-container" id="import-card-btn">
+					<input style="display: none;" type="file" id="open-folder-input" webkitdirectory directory multiple/>
+					<label for="open-folder-input" class="sidebar-screen btn-wrapper">
+						<div class="sidebar-btn-svg-wrapper">
+							<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12 19H5C3.89543 19 3 18.1046 3 17V7C3 5.89543 3.89543 5 5 5H9.58579C9.851 5 10.1054 5.10536 10.2929 5.29289L12 7H19C20.1046 7 21 7.89543 21 9V11" stroke="currentcolor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M18 14V17M18 20V17M18 17H15M18 17H21" stroke="currentcolor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+						</div>
+						<div class="sidebar-screen btn-title"><div>Open Folder</div></div>
+						<div></div>
+						<div class="sidebar-screen keybind-tooltip">Ctrl + Shft + O</div>
+					</label>
+				</div>
+				<div class="sidebar-screen btn-container" id="shuffle-card-btn">
+					<div class="sidebar-screen btn-wrapper">
+						<div class="sidebar-btn-svg-wrapper">
+							<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M18 4L21 7M21 7L18 10M21 7H17C16.0707 7 15.606 7 15.2196 7.07686C13.6329 7.39249 12.3925 8.63288 12.0769 10.2196C12 10.606 12 11.0707 12 12C12 12.9293 12 13.394 11.9231 13.7804C11.6075 15.3671 10.3671 16.6075 8.78036 16.9231C8.39397 17 7.92931 17 7 17H3M18 20L21 17M21 17L18 14M21 17H17C16.0707 17 15.606 17 15.2196 16.9231C15.1457 16.9084 15.0724 16.8917 15 16.873M3 7H7C7.92931 7 8.39397 7 8.78036 7.07686C8.85435 7.09158 8.92758 7.1083 9 7.12698" stroke="currentcolor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+						</div>
+						<div class="sidebar-screen btn-title"><div>Shuffle Cards</div></div>
+						<div></div>
+						<div class="sidebar-screen keybind-tooltip">Ctrl + Shft + S</div>
+					</div>
+				</div>
+                        <div class="sidebar-screen btn-container" id="create-card-btn">
+					<div class="sidebar-screen btn-wrapper">
+						<div class="sidebar-btn-svg-wrapper">
+							<svg style="scale: 0.6;" xmlns="http://www.w3.org/2000/svg" viewBox="176.6728 121.2309 251.9369 252.3937"><path fill-rule="evenodd" clip-rule="evenodd" d="M 2.109 13.337 C 2.109 11.68 3.452 10.337 5.109 10.337 L 15.109 10.337 C 16.241 10.337 17.227 10.964 17.738 11.89 L 21.948 13.018 C 23.548 13.447 24.498 15.092 24.069 16.693 L 20.446 30.216 C 20.017 31.816 18.372 32.766 16.771 32.337 L 9.307 30.337 L 5.109 30.337 C 3.452 30.337 2.109 28.994 2.109 27.337 L 2.109 13.337 Z M 18.109 27.337 L 18.109 14.06 L 21.43 14.95 C 21.964 15.093 22.28 15.642 22.137 16.175 L 18.514 29.698 C 18.371 30.231 17.822 30.548 17.289 30.405 L 16.229 30.121 C 17.331 29.677 18.109 28.598 18.109 27.337 Z M 5.109 12.337 C 4.556 12.337 4.109 12.785 4.109 13.337 L 4.109 27.337 C 4.109 27.889 4.556 28.337 5.109 28.337 L 15.109 28.337 C 15.661 28.337 16.109 27.889 16.109 27.337 L 16.109 13.337 C 16.109 12.785 15.661 12.337 15.109 12.337 L 5.109 12.337 Z" fill="currentcolor" transform="matrix(11.418966293334961, 0, 0, 11.418966293334961, 152.5902099609375, 3.1930410861968994)"/></svg>
+						</div>
+						<div class="sidebar-screen btn-title"><div>Create Cards</div></div>
+						<div></div>
+						<div class="sidebar-screen keybind-tooltip">Ctrl + Shft + Q</div>
+					</div>
+				</div>
+			</div>
+			<div class="sidebar-divisor"></div>
+			<div class="card-list-container"></div>
+		</div>
+	</div>
+	<div class="card-screen">
+		<div class="card-ui-wrapper" style="visibility: hidden;">
+			<div class="card-container">
+				<div class="card">
+					<div class="card-face card-front"></div>
+					<div class="card-face card-back"></div>
+				</div>
+			</div>
+			<div class="menu-ctrl-container">
+				<div class="card-menu progress-bar-container">
+					<div class="card-menu progress-bar"></div>
+
+					<div class="card-menu point"></div>
+					<div class="card-menu point"></div>
+					<div class="card-menu point"></div>
+					<div class="card-menu point"></div>
+					<div class="card-menu point"></div>
+					<div class="card-menu point"></div>
+					<div class="card-menu point"></div>
+					<div class="card-menu point"></div>
+					<div class="card-menu point"></div>
+					<div class="card-menu point"></div>
+				</div>
+				<div class="menu-ctrl-btn red-hover" id="unknown-btn" type="button">
+                              <div class="menu-btn-svg-wrapper">
+                                    <svg style="scale: 1.5;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentcolor" stroke-width="0.36"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M6.99486 7.00636C6.60433 7.39689 6.60433 8.03005 6.99486 8.42058L10.58 12.0057L6.99486 15.5909C6.60433 15.9814 6.60433 16.6146 6.99486 17.0051C7.38538 17.3956 8.01855 17.3956 8.40907 17.0051L11.9942 13.4199L15.5794 17.0051C15.9699 17.3956 16.6031 17.3956 16.9936 17.0051C17.3841 16.6146 17.3841 15.9814 16.9936 15.5909L13.4084 12.0057L16.9936 8.42059C17.3841 8.03007 17.3841 7.3969 16.9936 7.00638C16.603 6.61585 15.9699 6.61585 15.5794 7.00638L11.9942 10.5915L8.40907 7.00636C8.01855 6.61584 7.38538 6.61584 6.99486 7.00636Z" fill="currentcolor"></path> </g></svg>
+					</div>
+					<div class="end-menu tooltip">Learning</div>
+				</div>
+                        <div class="menu-ctrl-btn" id="return-btn" type="button">
+                              <div class="menu-btn-svg-wrapper">
+                                    <svg style="scale: 1.3;" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg" aria-labelledby="returnIconTitle" stroke="currentcolor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none" color="currentcolor" transform="rotate(180)matrix(-1, 0, 0, 1, 0, 0)"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title id="returnIconTitle">Return</title> <path d="M19,8 L19,11 C19,12.1045695 18.1045695,13 17,13 L6,13"></path> <polyline points="8 16 5 13 8 10"></polyline> </g></svg>
+                              </div>
+                              <div class="end-menu tooltip">Return</div>
+				</div>
+				<div class="menu-ctrl-btn green-hover" id="known-btn" type="button">
+                              <div class="menu-btn-svg-wrapper">
+                                    <svg style="scale: 1.3;" viewBox="0 0 24 24" id="_24x24_On_Light_Checkmark" data-name="24x24/On Light/Checkmark" xmlns="http://www.w3.org/2000/svg" fill="currentcolor" stroke="currentcolor" stroke-width="0.8399999999999999"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <rect id="view-box" width="24" height="24" fill="#currentcolor" opacity="0"></rect> <path id="Shape" d="M5.341,12.247a1,1,0,0,0,1.317,1.505l4-3.5a1,1,0,0,0,.028-1.48l-9-8.5A1,1,0,0,0,.313,1.727l8.2,7.745Z" transform="translate(19 6.5) rotate(90)" fill="#currentcolor"></path> </g></svg>
+                              </div>
+                              <div class="end-menu tooltip">Known</div>
+				</div>
+                        
+			</div>
+		</div>
+	</div>
+</body>
+<template id="card-template">
+	<div class="card">
+		<div class="card-face card-front"> front </div>
+		<div class="card-face card-back"> back </div>
+	</div>
+</template>
+<template id="finnish-screen">
+	<div class="dim appear">
+		<div class="menu">
+			<div class="progress-info">
+				<div style="display: flex; justify-content: center; flex-direction: column;">
+					<div style="display: flex; justify-content: center;">
+						<div class="end-menu-num"></div>
+						<div class="end-menu-unit">%</div>
+					</div>
+					<p class="end-menu-support"></p>
+				</div>
+				<div class="end-menu progress-bar-container">
+					<div class="end-menu progress-bar"></div>
+
+					<div class="end-menu point"></div>
+					<div class="end-menu point"></div>
+					<div class="end-menu point"></div>
+					<div class="end-menu point"></div>
+					<div class="end-menu point"></div>
+					<div class="end-menu point"></div>
+					<div class="end-menu point"></div>
+					<div class="end-menu point"></div>
+					<div class="end-menu point"></div>
+					<div class="end-menu point"></div>
+				</div>
+				<div class="end-menu info-num-container">
+					<div class="end-menu card-info-wrapper">
+						<div class="card-end-info fails-num"></div><div class="card-end-info text-unit">Failed</div>
+					</div>
+					<div class="card-end-info divisor"></div>
+					<div class="end-menu card-info-wrapper">
+						<div class="card-end-info card-num"></div>
+						<div class="card-end-info svg-unit">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="176.6728 121.2309 251.9369 252.3937" width="251.937px" height="252.394px">
+							<path fill-rule="evenodd" clip-rule="evenodd" d="M 2.109 13.337 C 2.109 11.68 3.452 10.337 5.109 10.337 L 15.109 10.337 C 16.241 10.337 17.227 10.964 17.738 11.89 L 21.948 13.018 C 23.548 13.447 24.498 15.092 24.069 16.693 L 20.446 30.216 C 20.017 31.816 18.372 32.766 16.771 32.337 L 9.307 30.337 L 5.109 30.337 C 3.452 30.337 2.109 28.994 2.109 27.337 L 2.109 13.337 Z M 18.109 27.337 L 18.109 14.06 L 21.43 14.95 C 21.964 15.093 22.28 15.642 22.137 16.175 L 18.514 29.698 C 18.371 30.231 17.822 30.548 17.289 30.405 L 16.229 30.121 C 17.331 29.677 18.109 28.598 18.109 27.337 Z M 5.109 12.337 C 4.556 12.337 4.109 12.785 4.109 13.337 L 4.109 27.337 C 4.109 27.889 4.556 28.337 5.109 28.337 L 15.109 28.337 C 15.661 28.337 16.109 27.889 16.109 27.337 L 16.109 13.337 C 16.109 12.785 15.661 12.337 15.109 12.337 L 5.109 12.337 Z" fill="currentcolor" transform="matrix(11.418966293334961, 0, 0, 11.418966293334961, 152.5902099609375, 3.1930410861968994)"/>
+							</svg>
+						</div>
+					</div>
+					<div class="card-end-info divisor"></div>
+					<div class="end-menu card-info-wrapper">
+						<div class="card-end-info success-num"></div><div class="card-end-info text-unit">Success</div>
+					</div>
+				</div>
+			</div>
+			<div class="menu-ctrl-container">
+				<div class="menu-ctrl-btn redo-fails-btn orange-hover">
+					<div class="menu-btn-svg-wrapper">
+                                    <svg fill="currentcolor" viewBox="0 -32 576 576" xmlns="http://www.w3.org/2000/svg"><path d="M569.517 440.013C587.975 472.007 564.806 512 527.94 512H48.054c-36.937 0-59.999-40.055-41.577-71.987L246.423 23.985c18.467-32.009 64.72-31.951 83.154 0l239.94 416.028zM288 354c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z"></path></g></svg>
+						<div>
+                                          <svg class="small-redo-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" transform="matrix(-1, 0, 0, 1, 0, 0)rotate(90)"><path d="M12 2.99982C16.9706 2.99982 21 7.02925 21 11.9998C21 16.9704 16.9706 20.9998 12 20.9998C7.02944 20.9998 3 16.9704 3 11.9998C3 9.17255 4.30367 6.64977 6.34267 4.99982" stroke="currentcolor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M3 4.49982H7V8.49982" stroke="currentcolor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                                    </div>
+					</div>
+					<div class="end-menu tooltip">Redo Failed</div>
+				</div>
+				<div class="menu-ctrl-btn redo-btn">
+					<div class="menu-btn-svg-wrapper">
+						<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" transform="matrix(-1, 0, 0, 1, 0, 0)rotate(90)"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g clip-path="url(#clip0_429_11071)"> <path d="M12 2.99982C16.9706 2.99982 21 7.02925 21 11.9998C21 16.9704 16.9706 20.9998 12 20.9998C7.02944 20.9998 3 16.9704 3 11.9998C3 9.17255 4.30367 6.64977 6.34267 4.99982" stroke="currentcolor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M3 4.49982H7V8.49982" stroke="currentcolor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path> </g> <defs> <clipPath id="clip0_429_11071"> <rect width="24" height="24" fill="white"></rect> </clipPath> </defs> </g></svg>
+					</div>
+					<div class="end-menu tooltip">Redo All</div>
+				</div>
+				<div class="menu-ctrl-btn red-hover" onclick="closeMenu_And_HideCardSet()">
+					<div class="menu-btn-svg-wrapper">
+						<svg style="scale: 1.5;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentcolor" stroke-width="0.36"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M6.99486 7.00636C6.60433 7.39689 6.60433 8.03005 6.99486 8.42058L10.58 12.0057L6.99486 15.5909C6.60433 15.9814 6.60433 16.6146 6.99486 17.0051C7.38538 17.3956 8.01855 17.3956 8.40907 17.0051L11.9942 13.4199L15.5794 17.0051C15.9699 17.3956 16.6031 17.3956 16.9936 17.0051C17.3841 16.6146 17.3841 15.9814 16.9936 15.5909L13.4084 12.0057L16.9936 8.42059C17.3841 8.03007 17.3841 7.3969 16.9936 7.00638C16.603 6.61585 15.9699 6.61585 15.5794 7.00638L11.9942 10.5915L8.40907 7.00636C8.01855 6.61584 7.38538 6.61584 6.99486 7.00636Z" fill="currentcolor"></path> </g></svg>
+					</div>
+					<div class="end-menu tooltip">Close</div>
+				</div>
+			</div>
+		</div>
+		<!-- <div class="menu-wrapper">
+		</div> -->
+	</div>
+</template>
+<template id="card-animation">
+	<div class="transition-card-wrapper">
+		<div class="transition-card"></div>
+	</div>
+</template>
+<template id="cardset-template">
+	<div class="card-template-item">
+		<div class="cardset-template-item-title"></div>
+		<div></div>
+		<div class="cardset-template-item-svg-container">
+			<div class="cardset-size-info"></div>
+			<svg class="cardset-template-svg card-num" xmlns="http://www.w3.org/2000/svg" viewBox="176.6728 121.2309 251.9369 252.3937" width="251.937px" height="252.394px"><path fill-rule="evenodd" clip-rule="evenodd" d="M 2.109 13.337 C 2.109 11.68 3.452 10.337 5.109 10.337 L 15.109 10.337 C 16.241 10.337 17.227 10.964 17.738 11.89 L 21.948 13.018 C 23.548 13.447 24.498 15.092 24.069 16.693 L 20.446 30.216 C 20.017 31.816 18.372 32.766 16.771 32.337 L 9.307 30.337 L 5.109 30.337 C 3.452 30.337 2.109 28.994 2.109 27.337 L 2.109 13.337 Z M 18.109 27.337 L 18.109 14.06 L 21.43 14.95 C 21.964 15.093 22.28 15.642 22.137 16.175 L 18.514 29.698 C 18.371 30.231 17.822 30.548 17.289 30.405 L 16.229 30.121 C 17.331 29.677 18.109 28.598 18.109 27.337 Z M 5.109 12.337 C 4.556 12.337 4.109 12.785 4.109 13.337 L 4.109 27.337 C 4.109 27.889 4.556 28.337 5.109 28.337 L 15.109 28.337 C 15.661 28.337 16.109 27.889 16.109 27.337 L 16.109 13.337 C 16.109 12.785 15.661 12.337 15.109 12.337 L 5.109 12.337 Z" fill="currentcolor" transform="matrix(11.418966293334961, 0, 0, 11.418966293334961, 152.5902099609375, 3.1930410861968994)"/></svg>
+			<div class="cardset-template-save-btn-wrapper" type="button">
+				<svg class="cardset-template-svg save-btn" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M8 20H6C4.89543 20 4 19.1046 4 18V6C4 4.89543 4.89543 4 6 4H9M8 20V14C8 13.4477 8.44772 13 9 13H15C15.5523 13 16 13.4477 16 14V20M8 20H16M16 20H18C19.1046 20 20 19.1046 20 18V8.82843C20 8.29799 19.7893 7.78929 19.4142 7.41421L16.5858 4.58579C16.2107 4.21071 15.702 4 15.1716 4H15M15 4V7C15 7.55228 14.5523 8 14 8H10C9.44772 8 9 7.55228 9 7V4M15 4H9" stroke="currentcolor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+			</div>
+		</div>
+	</div>
+</template>
+<template id="new-card-input">
+      <div class="card-creation new-card-input-container">
+            <div class="card-creation card-swicth-btn" type="button">
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" transform="matrix(-1, 0, 0, 1, 0, 0)rotate(90)"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g clip-path="url(#clip0_429_11071)"> <path d="M12 2.99982C16.9706 2.99982 21 7.02925 21 11.9998C21 16.9704 16.9706 20.9998 12 20.9998C7.02944 20.9998 3 16.9704 3 11.9998C3 9.17255 4.30367 6.64977 6.34267 4.99982" stroke="currentcolor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M3 4.49982H7V8.49982" stroke="currentcolor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path> </g> <defs> <clipPath id="clip0_429_11071"> <rect width="24" height="24" fill="white"></rect> </clipPath> </defs> </g></svg>
+            </div>
+            <div class="new-card-input-front-wrapper" data-face-side="Front"><textarea class="new-card-input-front no-scroll-bar" placeholder="..." name="input-front"></textarea></div>
+            <div class="new-card-input-back-wrapper" data-face-side="Back"><textarea class="new-card-input-back no-scroll-bar" placeholder="..." name="input-back"></textarea></div>
+      </div>
+</template>
+<template id="card-creation-menu">
+      <div class="dim appear">
+            <div class="menu">
+                  <div class="card-creation input-wrapper-info">
+                        <div class="card-creation title">Create Cards</div>
+                        <div class="card-creation input-info-container">
+                              <input type="text" id="new-card-name-input" name="setName" placeholder="Name ...">
+                              <!-- <label for="setName"></label> -->
+                              <div style="width: 40px;"></div>
+                              <!-- <div class="card-creation description">Flashcards Description</div> -->
+                              <input type="text" id="new-card-description-input" name="setDescription" placeholder="Description ...">
+                              <!-- <label for="setDescription"> -->
+                              <!-- </label> -->
+                        </div>
+                        <div class="card-creation input-container-cards no-scroll-bar">
+                              <div class="card-creation add-card-btn" type="button">
+                                    <div class="card-creation add-card-btn-wrapper">
+                                          <svg class="card-creation card-svg" xmlns="http://www.w3.org/2000/svg" viewBox="176.6728 121.2309 251.9369 252.3937" width="251.937px" height="252.394px"><path fill-rule="evenodd" clip-rule="evenodd" d="M 2.109 13.337 C 2.109 11.68 3.452 10.337 5.109 10.337 L 15.109 10.337 C 16.241 10.337 17.227 10.964 17.738 11.89 L 21.948 13.018 C 23.548 13.447 24.498 15.092 24.069 16.693 L 20.446 30.216 C 20.017 31.816 18.372 32.766 16.771 32.337 L 9.307 30.337 L 5.109 30.337 C 3.452 30.337 2.109 28.994 2.109 27.337 L 2.109 13.337 Z M 18.109 27.337 L 18.109 14.06 L 21.43 14.95 C 21.964 15.093 22.28 15.642 22.137 16.175 L 18.514 29.698 C 18.371 30.231 17.822 30.548 17.289 30.405 L 16.229 30.121 C 17.331 29.677 18.109 28.598 18.109 27.337 Z M 5.109 12.337 C 4.556 12.337 4.109 12.785 4.109 13.337 L 4.109 27.337 C 4.109 27.889 4.556 28.337 5.109 28.337 L 15.109 28.337 C 15.661 28.337 16.109 27.889 16.109 27.337 L 16.109 13.337 C 16.109 12.785 15.661 12.337 15.109 12.337 L 5.109 12.337 Z" fill="currentcolor" transform="matrix(11.418966293334961, 0, 0, 11.418966293334961, 152.5902099609375, 3.1930410861968994)"/></svg>
+                                          <div class="card-creation tooltip">add card</div>
+                                    </div>
+                              </div>
+                        </div>
+                  </div>
+                  <div class="menu-ctrl-container">
+                        <div class="menu-ctrl-btn red-hover" onclick="closeMenu_And_HideCardSet()">
+					<div class="menu-btn-svg-wrapper">
+						<svg style="scale: 1.5;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentcolor" stroke-width="0.36"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M6.99486 7.00636C6.60433 7.39689 6.60433 8.03005 6.99486 8.42058L10.58 12.0057L6.99486 15.5909C6.60433 15.9814 6.60433 16.6146 6.99486 17.0051C7.38538 17.3956 8.01855 17.3956 8.40907 17.0051L11.9942 13.4199L15.5794 17.0051C15.9699 17.3956 16.6031 17.3956 16.9936 17.0051C17.3841 16.6146 17.3841 15.9814 16.9936 15.5909L13.4084 12.0057L16.9936 8.42059C17.3841 8.03007 17.3841 7.3969 16.9936 7.00638C16.603 6.61585 15.9699 6.61585 15.5794 7.00638L11.9942 10.5915L8.40907 7.00636C8.01855 6.61584 7.38538 6.61584 6.99486 7.00636Z" fill="currentcolor"></path> </g></svg>
+					</div>
+					<div class="end-menu tooltip">Close</div>
+				</div>
+                        <button class="menu-ctrl-btn green-hover" id="proceed-create-card-btn">
+					<div class="menu-btn-svg-wrapper">
+                                    <svg style="scale: 1.3;" viewBox="0 0 24 24" id="_24x24_On_Light_Checkmark" data-name="24x24/On Light/Checkmark" xmlns="http://www.w3.org/2000/svg" fill="currentcolor" stroke="currentcolor" stroke-width="0.8399999999999999"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <rect id="view-box" width="24" height="24" fill="#currentcolor" opacity="0"></rect> <path id="Shape" d="M5.341,12.247a1,1,0,0,0,1.317,1.505l4-3.5a1,1,0,0,0,.028-1.48l-9-8.5A1,1,0,0,0,.313,1.727l8.2,7.745Z" transform="translate(19 6.5) rotate(90)" fill="#currentcolor"></path> </g></svg>
+					</div>
+					<div class="end-menu tooltip">Create</div>
+				</button>
+                  </div>
+            </div>
+      </div>
+</template>
+<script src="index.js"></script>
+</html>
