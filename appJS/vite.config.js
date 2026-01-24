@@ -1,10 +1,9 @@
-import { defineConfig } from 'vite';
+import { defineConfig } from "vite";
 
 export default defineConfig({
-    root: 'src',
-    "build": {
-        "distDir": "../dist",
-        "devPath": "index.html"
-    }
+        root: "src",
+        build: {
+                outDir: "../dist",
+                emptyOutDir: true,
+        },
 });
-
